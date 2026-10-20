@@ -1,0 +1,3798 @@
+{
+  "evaluations": [
+    {
+      "epoch": 20,
+      "label": "epoch_020",
+      "weights": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\yolo11s_full_25d\\weights\\checkpoint_e020.pt",
+      "weights_sha256": "54851740a81e60bbfa5aa391d24d972540ca1459c95ed37dfe8b8336b1687d9e",
+      "evaluation_dir": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\full_validation\\epoch_020",
+      "yolo_only": {
+        "sensitivity_at_1_fp_per_scan": 0.770949720670391,
+        "sensitivity_at_1_ci95": [
+          0.7102185044893378,
+          0.8596578947368421
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.492145836353302,
+          "TP": 138,
+          "FP": 116,
+          "FN": 41,
+          "sensitivity": 0.770949720670391,
+          "fp_per_scan": 0.928,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.4581005586592179,
+            "ci95": [
+              0.3115817745197169,
+              0.6105409356725147
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.6145251396648045,
+            "ci95": [
+              0.522603294249023,
+              0.6941213937804421
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.6759776536312849,
+            "ci95": [
+              0.5923664679756896,
+              0.7761457657365347
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.770949720670391,
+            "ci95": [
+              0.7102185044893378,
+              0.8596578947368421
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8547486033519553,
+            "ci95": [
+              0.7955624026066015,
+              0.9221672725976618
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9050279329608939,
+            "ci95": [
+              0.8440821368636957,
+              0.9622913168033191
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9329608938547486,
+            "ci95": [
+              0.8785986183561257,
+              0.9831553278182491
+            ]
+          }
+        ],
+        "validation_cpm": 0.744612928970471,
+        "candidate_pool_hits": 174,
+        "candidate_pool_misses": 5,
+        "maximum_candidate_pool_sensitivity": 0.9720670391061452,
+        "ignored_excluded_candidates": 1265,
+        "duplicate_hits_ignored": 220,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 1.1368683772161603e-13,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.3115817745197169,
+            0.522603294249023,
+            0.5923664679756896,
+            0.7102185044893378,
+            0.7955624026066015,
+            0.8440821368636957,
+            0.8785986183561257
+          ],
+          "upper": [
+            0.6105409356725147,
+            0.6941213937804421,
+            0.7761457657365347,
+            0.8596578947368421,
+            0.9221672725976618,
+            0.9622913168033191,
+            0.9831553278182491
+          ]
+        }
+      },
+      "new_two_stage": {
+        "sensitivity_at_1_fp_per_scan": 0.7932960893854749,
+        "sensitivity_at_1_ci95": [
+          0.7134331840238894,
+          0.8657835677339375
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.30223180827348983,
+          "TP": 142,
+          "FP": 124,
+          "FN": 37,
+          "sensitivity": 0.7932960893854749,
+          "fp_per_scan": 0.992,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.5083798882681564,
+            "ci95": [
+              0.4265786648448175,
+              0.6065720140515223
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.6089385474860335,
+            "ci95": [
+              0.5132442565649927,
+              0.706225988700565
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.6983240223463687,
+            "ci95": [
+              0.6141153381642511,
+              0.7740110427732736
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.7932960893854749,
+            "ci95": [
+              0.7134331840238894,
+              0.8657835677339375
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8547486033519553,
+            "ci95": [
+              0.782608695652174,
+              0.9122861842105262
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9217877094972067,
+            "ci95": [
+              0.859750959166895,
+              0.9670347744360902
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9217877094972067,
+            "ci95": [
+              0.8706373537716822,
+              0.9742009545753786
+            ]
+          }
+        ],
+        "validation_cpm": 0.7581803671189146,
+        "candidate_pool_hits": 174,
+        "candidate_pool_misses": 5,
+        "maximum_candidate_pool_sensitivity": 0.9720670391061452,
+        "ignored_excluded_candidates": 1265,
+        "duplicate_hits_ignored": 220,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 4.547473508864641e-13,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.4265786648448175,
+            0.5132442565649927,
+            0.6141153381642511,
+            0.7134331840238894,
+            0.782608695652174,
+            0.859750959166895,
+            0.8706373537716822
+          ],
+          "upper": [
+            0.6065720140515223,
+            0.706225988700565,
+            0.7740110427732736,
+            0.8657835677339375,
+            0.9122861842105262,
+            0.9670347744360902,
+            0.9742009545753786
+          ]
+        }
+      },
+      "old_two_stage": {
+        "sensitivity_at_1_fp_per_scan": 0.7821229050279329,
+        "sensitivity_at_1_ci95": [
+          0.7163387345679012,
+          0.8616460637605725
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.347107189684948,
+          "TP": 140,
+          "FP": 125,
+          "FN": 39,
+          "sensitivity": 0.7821229050279329,
+          "fp_per_scan": 1.0,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.5195530726256983,
+            "ci95": [
+              0.41564523399721337,
+              0.627207723420647
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.6312849162011173,
+            "ci95": [
+              0.5,
+              0.732172619047619
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.7094972067039106,
+            "ci95": [
+              0.6338758101410599,
+              0.7898241733094321
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.7821229050279329,
+            "ci95": [
+              0.7163387345679012,
+              0.8616460637605725
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8491620111731844,
+            "ci95": [
+              0.7849379652605458,
+              0.9194765100671141
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.8994413407821229,
+            "ci95": [
+              0.8439261199421966,
+              0.953651899215955
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9217877094972067,
+            "ci95": [
+              0.8709597175413256,
+              0.9726083234067897
+            ]
+          }
+        ],
+        "validation_cpm": 0.7589784517158819,
+        "candidate_pool_hits": 174,
+        "candidate_pool_misses": 5,
+        "maximum_candidate_pool_sensitivity": 0.9720670391061452,
+        "ignored_excluded_candidates": 1265,
+        "duplicate_hits_ignored": 220,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 2.842170943040401e-14,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.41564523399721337,
+            0.5,
+            0.6338758101410599,
+            0.7163387345679012,
+            0.7849379652605458,
+            0.8439261199421966,
+            0.8709597175413256
+          ],
+          "upper": [
+            0.627207723420647,
+            0.732172619047619,
+            0.7898241733094321,
+            0.8616460637605725,
+            0.9194765100671141,
+            0.953651899215955,
+            0.9726083234067897
+          ]
+        }
+      }
+    },
+    {
+      "epoch": 30,
+      "label": "epoch_030",
+      "weights": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\yolo11s_full_25d\\weights\\checkpoint_e030.pt",
+      "weights_sha256": "2cdac5ee21423b11b3df4792926093d2abdf5b4e558b53fce319121ffcda7f69",
+      "evaluation_dir": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\full_validation\\epoch_030",
+      "yolo_only": {
+        "sensitivity_at_1_fp_per_scan": 0.8212290502793296,
+        "sensitivity_at_1_ci95": [
+          0.7417132907056406,
+          0.8914642857142857
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.5306304097175598,
+          "TP": 147,
+          "FP": 121,
+          "FN": 32,
+          "sensitivity": 0.8212290502793296,
+          "fp_per_scan": 0.968,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.441340782122905,
+            "ci95": [
+              0.3154659980430528,
+              0.5930940474755995
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.5921787709497207,
+            "ci95": [
+              0.4450396825396825,
+              0.7632116004296455
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.7318435754189944,
+            "ci95": [
+              0.6470588235294118,
+              0.8219412915851272
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8212290502793296,
+            "ci95": [
+              0.7417132907056406,
+              0.8914642857142857
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8770949720670391,
+            "ci95": [
+              0.817246259335052,
+              0.9240707543718446
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9050279329608939,
+            "ci95": [
+              0.8587348361008346,
+              0.9487261146496815
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9329608938547486,
+            "ci95": [
+              0.8926246973365617,
+              0.9745214904143475
+            ]
+          }
+        ],
+        "validation_cpm": 0.7573822825219473,
+        "candidate_pool_hits": 172,
+        "candidate_pool_misses": 7,
+        "maximum_candidate_pool_sensitivity": 0.9608938547486033,
+        "ignored_excluded_candidates": 1062,
+        "duplicate_hits_ignored": 178,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 2.2737367544323206e-13,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.3154659980430528,
+            0.4450396825396825,
+            0.6470588235294118,
+            0.7417132907056406,
+            0.817246259335052,
+            0.8587348361008346,
+            0.8926246973365617
+          ],
+          "upper": [
+            0.5930940474755995,
+            0.7632116004296455,
+            0.8219412915851272,
+            0.8914642857142857,
+            0.9240707543718446,
+            0.9487261146496815,
+            0.9745214904143475
+          ]
+        }
+      },
+      "new_two_stage": {
+        "sensitivity_at_1_fp_per_scan": 0.8379888268156425,
+        "sensitivity_at_1_ci95": [
+          0.7471264367816092,
+          0.8909090909090909
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.3283457687433984,
+          "TP": 150,
+          "FP": 122,
+          "FN": 29,
+          "sensitivity": 0.8379888268156425,
+          "fp_per_scan": 0.976,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.4748603351955307,
+            "ci95": [
+              0.34782608695652173,
+              0.6467591602509266
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.6312849162011173,
+            "ci95": [
+              0.467725033803361,
+              0.7286669315967593
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.7206703910614525,
+            "ci95": [
+              0.6025537634408602,
+              0.8138448672954595
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8379888268156425,
+            "ci95": [
+              0.7471264367816092,
+              0.8909090909090909
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8770949720670391,
+            "ci95": [
+              0.8157518796992481,
+              0.9299537940429292
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9106145251396648,
+            "ci95": [
+              0.8604473908111174,
+              0.96045197740113
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9329608938547486,
+            "ci95": [
+              0.8898679972672262,
+              0.9736842105263158
+            ]
+          }
+        ],
+        "validation_cpm": 0.7693535514764566,
+        "candidate_pool_hits": 172,
+        "candidate_pool_misses": 7,
+        "maximum_candidate_pool_sensitivity": 0.9608938547486033,
+        "ignored_excluded_candidates": 1062,
+        "duplicate_hits_ignored": 178,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 2.2737367544323206e-13,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.34782608695652173,
+            0.467725033803361,
+            0.6025537634408602,
+            0.7471264367816092,
+            0.8157518796992481,
+            0.8604473908111174,
+            0.8898679972672262
+          ],
+          "upper": [
+            0.6467591602509266,
+            0.7286669315967593,
+            0.8138448672954595,
+            0.8909090909090909,
+            0.9299537940429292,
+            0.96045197740113,
+            0.9736842105263158
+          ]
+        }
+      },
+      "old_two_stage": {
+        "sensitivity_at_1_fp_per_scan": 0.8044692737430168,
+        "sensitivity_at_1_ci95": [
+          0.7411253196930947,
+          0.8830701754385964
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.3734341227410667,
+          "TP": 144,
+          "FP": 120,
+          "FN": 35,
+          "sensitivity": 0.8044692737430168,
+          "fp_per_scan": 0.96,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.49162011173184356,
+            "ci95": [
+              0.35252192982456143,
+              0.6069415772089182
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.5698324022346368,
+            "ci95": [
+              0.4690440787734602,
+              0.7500330687830687
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.7318435754189944,
+            "ci95": [
+              0.590137558837851,
+              0.8245723684210526
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8044692737430168,
+            "ci95": [
+              0.7411253196930947,
+              0.8830701754385964
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8603351955307262,
+            "ci95": [
+              0.8021963330786861,
+              0.9205428720808644
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9162011173184358,
+            "ci95": [
+              0.8626231527093596,
+              0.963355557373473
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9385474860335196,
+            "ci95": [
+              0.8974285714285715,
+              0.978952850877193
+            ]
+          }
+        ],
+        "validation_cpm": 0.7589784517158819,
+        "candidate_pool_hits": 172,
+        "candidate_pool_misses": 7,
+        "maximum_candidate_pool_sensitivity": 0.9608938547486033,
+        "ignored_excluded_candidates": 1062,
+        "duplicate_hits_ignored": 178,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 5.684341886080802e-14,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.35252192982456143,
+            0.4690440787734602,
+            0.590137558837851,
+            0.7411253196930947,
+            0.8021963330786861,
+            0.8626231527093596,
+            0.8974285714285715
+          ],
+          "upper": [
+            0.6069415772089182,
+            0.7500330687830687,
+            0.8245723684210526,
+            0.8830701754385964,
+            0.9205428720808644,
+            0.963355557373473,
+            0.978952850877193
+          ]
+        }
+      }
+    },
+    {
+      "epoch": 40,
+      "label": "epoch_040",
+      "weights": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\yolo11s_full_25d\\weights\\checkpoint_e040.pt",
+      "weights_sha256": "f7062419a31764bb5557a1bdedbd0813bfbb14842e8a0fcb0454d15abce9e0ff",
+      "evaluation_dir": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\full_validation\\epoch_040",
+      "yolo_only": {
+        "sensitivity_at_1_fp_per_scan": 0.7988826815642458,
+        "sensitivity_at_1_ci95": [
+          0.7277226756853437,
+          0.8765527065527066
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.5670045018196106,
+          "TP": 143,
+          "FP": 122,
+          "FN": 36,
+          "sensitivity": 0.7988826815642458,
+          "fp_per_scan": 0.976,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.5027932960893855,
+            "ci95": [
+              0.3821359576672173,
+              0.6384214825403308
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.5418994413407822,
+            "ci95": [
+              0.46178201627859056,
+              0.7542936021034181
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.7486033519553073,
+            "ci95": [
+              0.5860215053763441,
+              0.8299307345360825
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.7988826815642458,
+            "ci95": [
+              0.7277226756853437,
+              0.8765527065527066
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8770949720670391,
+            "ci95": [
+              0.8208933655422311,
+              0.9285829493087557
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.8994413407821229,
+            "ci95": [
+              0.848953887195122,
+              0.9464433538315988
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9497206703910615,
+            "ci95": [
+              0.9096037684817886,
+              0.9844579616473479
+            ]
+          }
+        ],
+        "validation_cpm": 0.759776536312849,
+        "candidate_pool_hits": 175,
+        "candidate_pool_misses": 4,
+        "maximum_candidate_pool_sensitivity": 0.9776536312849162,
+        "ignored_excluded_candidates": 1035,
+        "duplicate_hits_ignored": 182,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 1.1368683772161603e-13,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.3821359576672173,
+            0.46178201627859056,
+            0.5860215053763441,
+            0.7277226756853437,
+            0.8208933655422311,
+            0.848953887195122,
+            0.9096037684817886
+          ],
+          "upper": [
+            0.6384214825403308,
+            0.7542936021034181,
+            0.8299307345360825,
+            0.8765527065527066,
+            0.9285829493087557,
+            0.9464433538315988,
+            0.9844579616473479
+          ]
+        }
+      },
+      "new_two_stage": {
+        "sensitivity_at_1_fp_per_scan": 0.8212290502793296,
+        "sensitivity_at_1_ci95": [
+          0.7416517857142858,
+          0.8926651862594036
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.33169053850466135,
+          "TP": 147,
+          "FP": 123,
+          "FN": 32,
+          "sensitivity": 0.8212290502793296,
+          "fp_per_scan": 0.984,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.5195530726256983,
+            "ci95": [
+              0.3687179969879518,
+              0.6575432588320115
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.6201117318435754,
+            "ci95": [
+              0.4908422459893048,
+              0.7239912431318681
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.7039106145251397,
+            "ci95": [
+              0.6122082365880485,
+              0.7971106219042378
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8212290502793296,
+            "ci95": [
+              0.7416517857142858,
+              0.8926651862594036
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8659217877094972,
+            "ci95": [
+              0.8167479225707286,
+              0.9206493506493506
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9162011173184358,
+            "ci95": [
+              0.8756743310474654,
+              0.9583455882352941
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9441340782122905,
+            "ci95": [
+              0.9033777466105657,
+              0.981930416275882
+            ]
+          }
+        ],
+        "validation_cpm": 0.7701516360734237,
+        "candidate_pool_hits": 175,
+        "candidate_pool_misses": 4,
+        "maximum_candidate_pool_sensitivity": 0.9776536312849162,
+        "ignored_excluded_candidates": 1035,
+        "duplicate_hits_ignored": 182,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 5.684341886080802e-14,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.3687179969879518,
+            0.4908422459893048,
+            0.6122082365880485,
+            0.7416517857142858,
+            0.8167479225707286,
+            0.8756743310474654,
+            0.9033777466105657
+          ],
+          "upper": [
+            0.6575432588320115,
+            0.7239912431318681,
+            0.7971106219042378,
+            0.8926651862594036,
+            0.9206493506493506,
+            0.9583455882352941,
+            0.981930416275882
+          ]
+        }
+      },
+      "old_two_stage": {
+        "sensitivity_at_1_fp_per_scan": 0.8156424581005587,
+        "sensitivity_at_1_ci95": [
+          0.7499679487179487,
+          0.8933618090452261
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.3792317309832782,
+          "TP": 146,
+          "FP": 120,
+          "FN": 33,
+          "sensitivity": 0.8156424581005587,
+          "fp_per_scan": 0.96,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.4972067039106145,
+            "ci95": [
+              0.3692719742606791,
+              0.653190493105564
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.5977653631284916,
+            "ci95": [
+              0.4871376811594203,
+              0.7533888888888888
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.7486033519553073,
+            "ci95": [
+              0.5976115618661259,
+              0.8305790960451976
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8156424581005587,
+            "ci95": [
+              0.7499679487179487,
+              0.8933618090452261
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8659217877094972,
+            "ci95": [
+              0.8121489938668964,
+              0.9184814206268959
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9050279329608939,
+            "ci95": [
+              0.8606907323845887,
+              0.947982119859834
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9497206703910615,
+            "ci95": [
+              0.9079683813119396,
+              0.9843032108131211
+            ]
+          }
+        ],
+        "validation_cpm": 0.7685554668794892,
+        "candidate_pool_hits": 175,
+        "candidate_pool_misses": 4,
+        "maximum_candidate_pool_sensitivity": 0.9776536312849162,
+        "ignored_excluded_candidates": 1035,
+        "duplicate_hits_ignored": 182,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 4.547473508864641e-13,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.3692719742606791,
+            0.4871376811594203,
+            0.5976115618661259,
+            0.7499679487179487,
+            0.8121489938668964,
+            0.8606907323845887,
+            0.9079683813119396
+          ],
+          "upper": [
+            0.653190493105564,
+            0.7533888888888888,
+            0.8305790960451976,
+            0.8933618090452261,
+            0.9184814206268959,
+            0.947982119859834,
+            0.9843032108131211
+          ]
+        }
+      }
+    },
+    {
+      "epoch": 50,
+      "label": "epoch_050",
+      "weights": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\yolo11s_full_25d\\weights\\checkpoint_e050.pt",
+      "weights_sha256": "4dbd85ad61cde855e8f11d466c87c5660e34c8fa7adde6d3c7cd7d8e48c8f75f",
+      "evaluation_dir": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\full_validation\\epoch_050",
+      "yolo_only": {
+        "sensitivity_at_1_fp_per_scan": 0.8435754189944135,
+        "sensitivity_at_1_ci95": [
+          0.7686979166666668,
+          0.9212373737373738
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.541248083114624,
+          "TP": 151,
+          "FP": 123,
+          "FN": 28,
+          "sensitivity": 0.8435754189944135,
+          "fp_per_scan": 0.984,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.41899441340782123,
+            "ci95": [
+              0.2994233793464966,
+              0.6263752052545156
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.6201117318435754,
+            "ci95": [
+              0.44602403156384507,
+              0.7602241368245412
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.7430167597765364,
+            "ci95": [
+              0.65625,
+              0.8313286855286314
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8435754189944135,
+            "ci95": [
+              0.7686979166666668,
+              0.9212373737373738
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8938547486033519,
+            "ci95": [
+              0.8376898872927037,
+              0.9400054347826087
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9385474860335196,
+            "ci95": [
+              0.8881987577639752,
+              0.9718407668231612
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9664804469273743,
+            "ci95": [
+              0.929285458131612,
+              0.9941893498942918
+            ]
+          }
+        ],
+        "validation_cpm": 0.7749401436552273,
+        "candidate_pool_hits": 174,
+        "candidate_pool_misses": 5,
+        "maximum_candidate_pool_sensitivity": 0.9720670391061452,
+        "ignored_excluded_candidates": 965,
+        "duplicate_hits_ignored": 173,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 5.684341886080802e-14,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.2994233793464966,
+            0.44602403156384507,
+            0.65625,
+            0.7686979166666668,
+            0.8376898872927037,
+            0.8881987577639752,
+            0.929285458131612
+          ],
+          "upper": [
+            0.6263752052545156,
+            0.7602241368245412,
+            0.8313286855286314,
+            0.9212373737373738,
+            0.9400054347826087,
+            0.9718407668231612,
+            0.9941893498942918
+          ]
+        }
+      },
+      "new_two_stage": {
+        "sensitivity_at_1_fp_per_scan": 0.8379888268156425,
+        "sensitivity_at_1_ci95": [
+          0.7687978051213834,
+          0.8947368421052632
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.33321493697279436,
+          "TP": 150,
+          "FP": 123,
+          "FN": 29,
+          "sensitivity": 0.8379888268156425,
+          "fp_per_scan": 0.984,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.5642458100558659,
+            "ci95": [
+              0.45543807264397906,
+              0.6705202312138728
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.6256983240223464,
+            "ci95": [
+              0.5312455861581921,
+              0.736856806821523
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.7486033519553073,
+            "ci95": [
+              0.6390422696115766,
+              0.8192107412701654
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8379888268156425,
+            "ci95": [
+              0.7687978051213834,
+              0.8947368421052632
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8994413407821229,
+            "ci95": [
+              0.8446622670807454,
+              0.9447957811580805
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9329608938547486,
+            "ci95": [
+              0.8916256157635468,
+              0.9714435564435564
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9441340782122905,
+            "ci95": [
+              0.9063957760661895,
+              0.9825581395348837
+            ]
+          }
+        ],
+        "validation_cpm": 0.7932960893854748,
+        "candidate_pool_hits": 174,
+        "candidate_pool_misses": 5,
+        "maximum_candidate_pool_sensitivity": 0.9720670391061452,
+        "ignored_excluded_candidates": 965,
+        "duplicate_hits_ignored": 173,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 2.2737367544323206e-13,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.45543807264397906,
+            0.5312455861581921,
+            0.6390422696115766,
+            0.7687978051213834,
+            0.8446622670807454,
+            0.8916256157635468,
+            0.9063957760661895
+          ],
+          "upper": [
+            0.6705202312138728,
+            0.736856806821523,
+            0.8192107412701654,
+            0.8947368421052632,
+            0.9447957811580805,
+            0.9714435564435564,
+            0.9825581395348837
+          ]
+        }
+      },
+      "old_two_stage": {
+        "sensitivity_at_1_fp_per_scan": 0.8379888268156425,
+        "sensitivity_at_1_ci95": [
+          0.7821550123762376,
+          0.8981031588913755
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.40779990006200606,
+          "TP": 150,
+          "FP": 103,
+          "FN": 29,
+          "sensitivity": 0.8379888268156425,
+          "fp_per_scan": 0.824,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.6033519553072626,
+            "ci95": [
+              0.45058179837591605,
+              0.6986375018412138
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.6536312849162011,
+            "ci95": [
+              0.5574407327586207,
+              0.7666717791411043
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.770949720670391,
+            "ci95": [
+              0.670284135753749,
+              0.8514285714285714
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8379888268156425,
+            "ci95": [
+              0.7821550123762376,
+              0.8981031588913755
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8770949720670391,
+            "ci95": [
+              0.8232044198895028,
+              0.930635838150289
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9217877094972067,
+            "ci95": [
+              0.8791081750619323,
+              0.964296218487395
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9553072625698324,
+            "ci95": [
+              0.9146177550485183,
+              0.985088048963814
+            ]
+          }
+        ],
+        "validation_cpm": 0.8028731045490822,
+        "candidate_pool_hits": 174,
+        "candidate_pool_misses": 5,
+        "maximum_candidate_pool_sensitivity": 0.9720670391061452,
+        "ignored_excluded_candidates": 965,
+        "duplicate_hits_ignored": 173,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 5.684341886080802e-14,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.45058179837591605,
+            0.5574407327586207,
+            0.670284135753749,
+            0.7821550123762376,
+            0.8232044198895028,
+            0.8791081750619323,
+            0.9146177550485183
+          ],
+          "upper": [
+            0.6986375018412138,
+            0.7666717791411043,
+            0.8514285714285714,
+            0.8981031588913755,
+            0.930635838150289,
+            0.964296218487395,
+            0.985088048963814
+          ]
+        }
+      }
+    },
+    {
+      "epoch": 60,
+      "label": "epoch_060",
+      "weights": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\yolo11s_full_25d\\weights\\checkpoint_e060.pt",
+      "weights_sha256": "f2019f2b0cfe8b84285ca44c56fbf9776bdc240b2ac754af4ff088a4fcd9aa7e",
+      "evaluation_dir": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\full_validation\\epoch_060",
+      "yolo_only": {
+        "sensitivity_at_1_fp_per_scan": 0.8268156424581006,
+        "sensitivity_at_1_ci95": [
+          0.7696400983146068,
+          0.9030750553233341
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.5916686058044434,
+          "TP": 148,
+          "FP": 110,
+          "FN": 31,
+          "sensitivity": 0.8268156424581006,
+          "fp_per_scan": 0.88,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.4748603351955307,
+            "ci95": [
+              0.3806983549509649,
+              0.5633517179023507
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.5810055865921788,
+            "ci95": [
+              0.4427038433908046,
+              0.7452258970605689
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.7877094972067039,
+            "ci95": [
+              0.6790329139661965,
+              0.8461538461538461
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8268156424581006,
+            "ci95": [
+              0.7696400983146068,
+              0.9030750553233341
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.9050279329608939,
+            "ci95": [
+              0.8605752840909091,
+              0.948728813559322
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9329608938547486,
+            "ci95": [
+              0.8900985221674876,
+              0.9741976840363937
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9497206703910615,
+            "ci95": [
+              0.9146341463414634,
+              0.9872611464968153
+            ]
+          }
+        ],
+        "validation_cpm": 0.7797286512370312,
+        "candidate_pool_hits": 172,
+        "candidate_pool_misses": 7,
+        "maximum_candidate_pool_sensitivity": 0.9608938547486033,
+        "ignored_excluded_candidates": 940,
+        "duplicate_hits_ignored": 165,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 5.684341886080802e-14,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.3806983549509649,
+            0.4427038433908046,
+            0.6790329139661965,
+            0.7696400983146068,
+            0.8605752840909091,
+            0.8900985221674876,
+            0.9146341463414634
+          ],
+          "upper": [
+            0.5633517179023507,
+            0.7452258970605689,
+            0.8461538461538461,
+            0.9030750553233341,
+            0.948728813559322,
+            0.9741976840363937,
+            0.9872611464968153
+          ]
+        }
+      },
+      "new_two_stage": {
+        "sensitivity_at_1_fp_per_scan": 0.8547486033519553,
+        "sensitivity_at_1_ci95": [
+          0.7701624462494028,
+          0.902731288981289
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.32623719124887884,
+          "TP": 153,
+          "FP": 125,
+          "FN": 26,
+          "sensitivity": 0.8547486033519553,
+          "fp_per_scan": 1.0,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.5195530726256983,
+            "ci95": [
+              0.4279044894913568,
+              0.6647398843930635
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.6424581005586593,
+            "ci95": [
+              0.5289329125759701,
+              0.7263397129186603
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.7094972067039106,
+            "ci95": [
+              0.6375689528362599,
+              0.8152991954408314
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8547486033519553,
+            "ci95": [
+              0.7701624462494028,
+              0.902731288981289
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8770949720670391,
+            "ci95": [
+              0.8241689128481581,
+              0.9333532934131736
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9329608938547486,
+            "ci95": [
+              0.8876973705028004,
+              0.971268472906404
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9553072625698324,
+            "ci95": [
+              0.9166666666666666,
+              0.9880292356463544
+            ]
+          }
+        ],
+        "validation_cpm": 0.7845171588188349,
+        "candidate_pool_hits": 172,
+        "candidate_pool_misses": 7,
+        "maximum_candidate_pool_sensitivity": 0.9608938547486033,
+        "ignored_excluded_candidates": 940,
+        "duplicate_hits_ignored": 165,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 1.1368683772161603e-13,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.4279044894913568,
+            0.5289329125759701,
+            0.6375689528362599,
+            0.7701624462494028,
+            0.8241689128481581,
+            0.8876973705028004,
+            0.9166666666666666
+          ],
+          "upper": [
+            0.6647398843930635,
+            0.7263397129186603,
+            0.8152991954408314,
+            0.902731288981289,
+            0.9333532934131736,
+            0.971268472906404,
+            0.9880292356463544
+          ]
+        }
+      },
+      "old_two_stage": {
+        "sensitivity_at_1_fp_per_scan": 0.8212290502793296,
+        "sensitivity_at_1_ci95": [
+          0.7514089595375723,
+          0.8850738916256158
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.3879244927233927,
+          "TP": 147,
+          "FP": 113,
+          "FN": 32,
+          "sensitivity": 0.8212290502793296,
+          "fp_per_scan": 0.904,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.5027932960893855,
+            "ci95": [
+              0.4036634804924313,
+              0.6519455195438296
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.6424581005586593,
+            "ci95": [
+              0.5127551020408163,
+              0.7456671891838934
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.7374301675977654,
+            "ci95": [
+              0.6511337209302326,
+              0.8201492698057123
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8212290502793296,
+            "ci95": [
+              0.7514089595375723,
+              0.8850738916256158
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8770949720670391,
+            "ci95": [
+              0.8176307189542483,
+              0.9263245614035087
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9329608938547486,
+            "ci95": [
+              0.8944444444444445,
+              0.9714285714285714
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9497206703910615,
+            "ci95": [
+              0.9162430121215476,
+              0.9868525812939993
+            ]
+          }
+        ],
+        "validation_cpm": 0.7805267358339985,
+        "candidate_pool_hits": 172,
+        "candidate_pool_misses": 7,
+        "maximum_candidate_pool_sensitivity": 0.9608938547486033,
+        "ignored_excluded_candidates": 940,
+        "duplicate_hits_ignored": 165,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 1.4210854715202004e-14,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.4036634804924313,
+            0.5127551020408163,
+            0.6511337209302326,
+            0.7514089595375723,
+            0.8176307189542483,
+            0.8944444444444445,
+            0.9162430121215476
+          ],
+          "upper": [
+            0.6519455195438296,
+            0.7456671891838934,
+            0.8201492698057123,
+            0.8850738916256158,
+            0.9263245614035087,
+            0.9714285714285714,
+            0.9868525812939993
+          ]
+        }
+      }
+    },
+    {
+      "epoch": 70,
+      "label": "epoch_070",
+      "weights": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\yolo11s_full_25d\\weights\\checkpoint_e070.pt",
+      "weights_sha256": "4a3ec2ff3b047c52a317aea8a0b038350c4f0cdb02c4ace28826d4d1027dd866",
+      "evaluation_dir": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\full_validation\\epoch_070",
+      "yolo_only": {
+        "sensitivity_at_1_fp_per_scan": 0.8268156424581006,
+        "sensitivity_at_1_ci95": [
+          0.7533202247191011,
+          0.8932880774032459
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.5933417677879333,
+          "TP": 148,
+          "FP": 117,
+          "FN": 31,
+          "sensitivity": 0.8268156424581006,
+          "fp_per_scan": 0.936,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.49162011173184356,
+            "ci95": [
+              0.36516630996968075,
+              0.609759447869204
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.5921787709497207,
+            "ci95": [
+              0.4682840838023765,
+              0.7687869040959662
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.7597765363128491,
+            "ci95": [
+              0.6687463662790697,
+              0.8389530201342281
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8268156424581006,
+            "ci95": [
+              0.7533202247191011,
+              0.8932880774032459
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.88268156424581,
+            "ci95": [
+              0.826664739884393,
+              0.9333532934131736
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9273743016759777,
+            "ci95": [
+              0.8888888888888888,
+              0.9711024184439572
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9497206703910615,
+            "ci95": [
+              0.9148871302542813,
+              0.9846192893401016
+            ]
+          }
+        ],
+        "validation_cpm": 0.7757382282521947,
+        "candidate_pool_hits": 174,
+        "candidate_pool_misses": 5,
+        "maximum_candidate_pool_sensitivity": 0.9720670391061452,
+        "ignored_excluded_candidates": 857,
+        "duplicate_hits_ignored": 167,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 1.4210854715202004e-14,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.36516630996968075,
+            0.4682840838023765,
+            0.6687463662790697,
+            0.7533202247191011,
+            0.826664739884393,
+            0.8888888888888888,
+            0.9148871302542813
+          ],
+          "upper": [
+            0.609759447869204,
+            0.7687869040959662,
+            0.8389530201342281,
+            0.8932880774032459,
+            0.9333532934131736,
+            0.9711024184439572,
+            0.9846192893401016
+          ]
+        }
+      },
+      "new_two_stage": {
+        "sensitivity_at_1_fp_per_scan": 0.8156424581005587,
+        "sensitivity_at_1_ci95": [
+          0.7485020756033944,
+          0.8894736842105263
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.33700631697839967,
+          "TP": 146,
+          "FP": 125,
+          "FN": 33,
+          "sensitivity": 0.8156424581005587,
+          "fp_per_scan": 1.0,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.5363128491620112,
+            "ci95": [
+              0.4062386775362319,
+              0.655595238095238
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.6256983240223464,
+            "ci95": [
+              0.5202035756025143,
+              0.7176656524678837
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.6927374301675978,
+            "ci95": [
+              0.6272544283413848,
+              0.8042224880382774
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8156424581005587,
+            "ci95": [
+              0.7485020756033944,
+              0.8894736842105263
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.888268156424581,
+            "ci95": [
+              0.8313796958855099,
+              0.9348285364360074
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9273743016759777,
+            "ci95": [
+              0.8780237904838065,
+              0.9695507996836977
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9497206703910615,
+            "ci95": [
+              0.9109413417632596,
+              0.9827586206896551
+            ]
+          }
+        ],
+        "validation_cpm": 0.776536312849162,
+        "candidate_pool_hits": 174,
+        "candidate_pool_misses": 5,
+        "maximum_candidate_pool_sensitivity": 0.9720670391061452,
+        "ignored_excluded_candidates": 857,
+        "duplicate_hits_ignored": 167,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 1.1368683772161603e-13,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.4062386775362319,
+            0.5202035756025143,
+            0.6272544283413848,
+            0.7485020756033944,
+            0.8313796958855099,
+            0.8780237904838065,
+            0.9109413417632596
+          ],
+          "upper": [
+            0.655595238095238,
+            0.7176656524678837,
+            0.8042224880382774,
+            0.8894736842105263,
+            0.9348285364360074,
+            0.9695507996836977,
+            0.9827586206896551
+          ]
+        }
+      },
+      "old_two_stage": {
+        "sensitivity_at_1_fp_per_scan": 0.8100558659217877,
+        "sensitivity_at_1_ci95": [
+          0.75,
+          0.8765527065527066
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.3869943218911587,
+          "TP": 145,
+          "FP": 117,
+          "FN": 34,
+          "sensitivity": 0.8100558659217877,
+          "fp_per_scan": 0.936,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.5418994413407822,
+            "ci95": [
+              0.391025641025641,
+              0.6532010623340102
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.6480446927374302,
+            "ci95": [
+              0.5107167902224004,
+              0.7306144814090019
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.7262569832402235,
+            "ci95": [
+              0.6524064171122995,
+              0.8221033625844529
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8100558659217877,
+            "ci95": [
+              0.75,
+              0.8765527065527066
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8770949720670391,
+            "ci95": [
+              0.8282788825757575,
+              0.9273950723392064
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9329608938547486,
+            "ci95": [
+              0.891298966853207,
+              0.9714522494080505
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9497206703910615,
+            "ci95": [
+              0.9121924417046369,
+              0.9827586206896551
+            ]
+          }
+        ],
+        "validation_cpm": 0.7837190742218676,
+        "candidate_pool_hits": 174,
+        "candidate_pool_misses": 5,
+        "maximum_candidate_pool_sensitivity": 0.9720670391061452,
+        "ignored_excluded_candidates": 857,
+        "duplicate_hits_ignored": 167,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 5.684341886080802e-14,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.391025641025641,
+            0.5107167902224004,
+            0.6524064171122995,
+            0.75,
+            0.8282788825757575,
+            0.891298966853207,
+            0.9121924417046369
+          ],
+          "upper": [
+            0.6532010623340102,
+            0.7306144814090019,
+            0.8221033625844529,
+            0.8765527065527066,
+            0.9273950723392064,
+            0.9714522494080505,
+            0.9827586206896551
+          ]
+        }
+      }
+    },
+    {
+      "epoch": 80,
+      "label": "epoch_080",
+      "weights": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\yolo11s_full_25d\\weights\\checkpoint_e080.pt",
+      "weights_sha256": "2640a65c52b35b1cbead36536a437cbb3e0ba90c1a6f5da936646fec6849c0f9",
+      "evaluation_dir": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\full_validation\\epoch_080",
+      "yolo_only": {
+        "sensitivity_at_1_fp_per_scan": 0.8491620111731844,
+        "sensitivity_at_1_ci95": [
+          0.7733243243243243,
+          0.9085714285714286
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.5715426206588745,
+          "TP": 152,
+          "FP": 124,
+          "FN": 27,
+          "sensitivity": 0.8491620111731844,
+          "fp_per_scan": 0.992,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.45251396648044695,
+            "ci95": [
+              0.302554945054945,
+              0.5846496815286624
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.5865921787709497,
+            "ci95": [
+              0.4475788148240269,
+              0.7872370995353387
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.7653631284916201,
+            "ci95": [
+              0.6914152424136729,
+              0.8450865191146881
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8491620111731844,
+            "ci95": [
+              0.7733243243243243,
+              0.9085714285714286
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8770949720670391,
+            "ci95": [
+              0.8265388905790487,
+              0.9257142857142857
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9273743016759777,
+            "ci95": [
+              0.8786127167630058,
+              0.9642909974640744
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9553072625698324,
+            "ci95": [
+              0.9162518515966792,
+              0.9844579616473479
+            ]
+          }
+        ],
+        "validation_cpm": 0.7733439744612929,
+        "candidate_pool_hits": 173,
+        "candidate_pool_misses": 6,
+        "maximum_candidate_pool_sensitivity": 0.9664804469273743,
+        "ignored_excluded_candidates": 828,
+        "duplicate_hits_ignored": 163,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 5.684341886080802e-14,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.302554945054945,
+            0.4475788148240269,
+            0.6914152424136729,
+            0.7733243243243243,
+            0.8265388905790487,
+            0.8786127167630058,
+            0.9162518515966792
+          ],
+          "upper": [
+            0.5846496815286624,
+            0.7872370995353387,
+            0.8450865191146881,
+            0.9085714285714286,
+            0.9257142857142857,
+            0.9642909974640744,
+            0.9844579616473479
+          ]
+        }
+      },
+      "new_two_stage": {
+        "sensitivity_at_1_fp_per_scan": 0.8212290502793296,
+        "sensitivity_at_1_ci95": [
+          0.7468893893893894,
+          0.8908101237842617
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.34631034749552825,
+          "TP": 147,
+          "FP": 125,
+          "FN": 32,
+          "sensitivity": 0.8212290502793296,
+          "fp_per_scan": 1.0,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.553072625698324,
+            "ci95": [
+              0.4112024365821095,
+              0.6684805900621118
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.6368715083798883,
+            "ci95": [
+              0.5322528949545078,
+              0.7284080767514503
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.7094972067039106,
+            "ci95": [
+              0.6282220106827436,
+              0.7952056634180033
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8212290502793296,
+            "ci95": [
+              0.7468893893893894,
+              0.8908101237842617
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.88268156424581,
+            "ci95": [
+              0.8287622309197652,
+              0.9298245614035088
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9217877094972067,
+            "ci95": [
+              0.8837112403100775,
+              0.9653186344646025
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9385474860335196,
+            "ci95": [
+              0.8972530095475302,
+              0.974620895714194
+            ]
+          }
+        ],
+        "validation_cpm": 0.7805267358339985,
+        "candidate_pool_hits": 173,
+        "candidate_pool_misses": 6,
+        "maximum_candidate_pool_sensitivity": 0.9664804469273743,
+        "ignored_excluded_candidates": 828,
+        "duplicate_hits_ignored": 163,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 1.4210854715202004e-14,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.4112024365821095,
+            0.5322528949545078,
+            0.6282220106827436,
+            0.7468893893893894,
+            0.8287622309197652,
+            0.8837112403100775,
+            0.8972530095475302
+          ],
+          "upper": [
+            0.6684805900621118,
+            0.7284080767514503,
+            0.7952056634180033,
+            0.8908101237842617,
+            0.9298245614035088,
+            0.9653186344646025,
+            0.974620895714194
+          ]
+        }
+      },
+      "old_two_stage": {
+        "sensitivity_at_1_fp_per_scan": 0.8044692737430168,
+        "sensitivity_at_1_ci95": [
+          0.7486338797814208,
+          0.8862340184495873
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.423825440259435,
+          "TP": 144,
+          "FP": 108,
+          "FN": 35,
+          "sensitivity": 0.8044692737430168,
+          "fp_per_scan": 0.864,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.5642458100558659,
+            "ci95": [
+              0.37625225405730317,
+              0.6813369963369963
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.6536312849162011,
+            "ci95": [
+              0.5293815987933636,
+              0.7343772069209039
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.7318435754189944,
+            "ci95": [
+              0.6385967907135541,
+              0.8182169634489223
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8044692737430168,
+            "ci95": [
+              0.7486338797814208,
+              0.8862340184495873
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8770949720670391,
+            "ci95": [
+              0.8223647660818713,
+              0.9197592592592593
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9217877094972067,
+            "ci95": [
+              0.8795081424599497,
+              0.9590643274853801
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9441340782122905,
+            "ci95": [
+              0.9055297319932999,
+              0.9794018577115443
+            ]
+          }
+        ],
+        "validation_cpm": 0.7853152434158022,
+        "candidate_pool_hits": 173,
+        "candidate_pool_misses": 6,
+        "maximum_candidate_pool_sensitivity": 0.9664804469273743,
+        "ignored_excluded_candidates": 828,
+        "duplicate_hits_ignored": 163,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 1.1368683772161603e-13,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.37625225405730317,
+            0.5293815987933636,
+            0.6385967907135541,
+            0.7486338797814208,
+            0.8223647660818713,
+            0.8795081424599497,
+            0.9055297319932999
+          ],
+          "upper": [
+            0.6813369963369963,
+            0.7343772069209039,
+            0.8182169634489223,
+            0.8862340184495873,
+            0.9197592592592593,
+            0.9590643274853801,
+            0.9794018577115443
+          ]
+        }
+      }
+    },
+    {
+      "epoch": 90,
+      "label": "epoch_090",
+      "weights": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\yolo11s_full_25d\\weights\\checkpoint_e090.pt",
+      "weights_sha256": "113745200823401dcb8e5469dbfb797a23d814b16a579d8b81413135f1ba587c",
+      "evaluation_dir": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\full_validation\\epoch_090",
+      "yolo_only": {
+        "sensitivity_at_1_fp_per_scan": 0.8603351955307262,
+        "sensitivity_at_1_ci95": [
+          0.7803148944750639,
+          0.9109598006167969
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.5705289244651794,
+          "TP": 154,
+          "FP": 121,
+          "FN": 25,
+          "sensitivity": 0.8603351955307262,
+          "fp_per_scan": 0.968,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.44692737430167595,
+            "ci95": [
+              0.3076687116564417,
+              0.6169102192965061
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.6368715083798883,
+            "ci95": [
+              0.4410054347826087,
+              0.7880539297658862
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.7597765363128491,
+            "ci95": [
+              0.6914701688966879,
+              0.8481754719974616
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8603351955307262,
+            "ci95": [
+              0.7803148944750639,
+              0.9109598006167969
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.88268156424581,
+            "ci95": [
+              0.8323455773625488,
+              0.9306403824481041
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.8994413407821229,
+            "ci95": [
+              0.8456679894179894,
+              0.9551305970149254
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9385474860335196,
+            "ci95": [
+              0.8979520645467489,
+              0.9746914556962025
+            ]
+          }
+        ],
+        "validation_cpm": 0.7749401436552275,
+        "candidate_pool_hits": 172,
+        "candidate_pool_misses": 7,
+        "maximum_candidate_pool_sensitivity": 0.9608938547486033,
+        "ignored_excluded_candidates": 800,
+        "duplicate_hits_ignored": 162,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 1.4210854715202004e-14,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.3076687116564417,
+            0.4410054347826087,
+            0.6914701688966879,
+            0.7803148944750639,
+            0.8323455773625488,
+            0.8456679894179894,
+            0.8979520645467489
+          ],
+          "upper": [
+            0.6169102192965061,
+            0.7880539297658862,
+            0.8481754719974616,
+            0.9109598006167969,
+            0.9306403824481041,
+            0.9551305970149254,
+            0.9746914556962025
+          ]
+        }
+      },
+      "new_two_stage": {
+        "sensitivity_at_1_fp_per_scan": 0.8212290502793296,
+        "sensitivity_at_1_ci95": [
+          0.7486599743565687,
+          0.88
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.35290633300664886,
+          "TP": 147,
+          "FP": 120,
+          "FN": 32,
+          "sensitivity": 0.8212290502793296,
+          "fp_per_scan": 0.96,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.5307262569832403,
+            "ci95": [
+              0.42245115954102064,
+              0.6720452141723955
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.6480446927374302,
+            "ci95": [
+              0.540185676392573,
+              0.7312544642857143
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.7150837988826816,
+            "ci95": [
+              0.6417112299465241,
+              0.8072353585464854
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8212290502793296,
+            "ci95": [
+              0.7486599743565687,
+              0.88
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8659217877094972,
+            "ci95": [
+              0.8092476041983572,
+              0.9175271893055398
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9162011173184358,
+            "ci95": [
+              0.8711253330244411,
+              0.9589766081871345
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9385474860335196,
+            "ci95": [
+              0.9023249131248329,
+              0.9753271235307164
+            ]
+          }
+        ],
+        "validation_cpm": 0.776536312849162,
+        "candidate_pool_hits": 172,
+        "candidate_pool_misses": 7,
+        "maximum_candidate_pool_sensitivity": 0.9608938547486033,
+        "ignored_excluded_candidates": 800,
+        "duplicate_hits_ignored": 162,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 1.1368683772161603e-13,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.42245115954102064,
+            0.540185676392573,
+            0.6417112299465241,
+            0.7486599743565687,
+            0.8092476041983572,
+            0.8711253330244411,
+            0.9023249131248329
+          ],
+          "upper": [
+            0.6720452141723955,
+            0.7312544642857143,
+            0.8072353585464854,
+            0.88,
+            0.9175271893055398,
+            0.9589766081871345,
+            0.9753271235307164
+          ]
+        }
+      },
+      "old_two_stage": {
+        "sensitivity_at_1_fp_per_scan": 0.8100558659217877,
+        "sensitivity_at_1_ci95": [
+          0.7562492226368159,
+          0.8743340163934425
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.4117663509005425,
+          "TP": 145,
+          "FP": 115,
+          "FN": 34,
+          "sensitivity": 0.8100558659217877,
+          "fp_per_scan": 0.92,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.5418994413407822,
+            "ci95": [
+              0.41931052818149595,
+              0.6686746987951807
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.6424581005586593,
+            "ci95": [
+              0.5362084398976983,
+              0.7368496240601503
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.7262569832402235,
+            "ci95": [
+              0.6513551839794811,
+              0.825189393939394
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8100558659217877,
+            "ci95": [
+              0.7562492226368159,
+              0.8743340163934425
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8547486033519553,
+            "ci95": [
+              0.7988897123407993,
+              0.9105285210232286
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9106145251396648,
+            "ci95": [
+              0.8717948717948718,
+              0.9575837320574162
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9385474860335196,
+            "ci95": [
+              0.9022873915802835,
+              0.9736876550013778
+            ]
+          }
+        ],
+        "validation_cpm": 0.7749401436552275,
+        "candidate_pool_hits": 172,
+        "candidate_pool_misses": 7,
+        "maximum_candidate_pool_sensitivity": 0.9608938547486033,
+        "ignored_excluded_candidates": 800,
+        "duplicate_hits_ignored": 162,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 2.2737367544323206e-13,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.41931052818149595,
+            0.5362084398976983,
+            0.6513551839794811,
+            0.7562492226368159,
+            0.7988897123407993,
+            0.8717948717948718,
+            0.9022873915802835
+          ],
+          "upper": [
+            0.6686746987951807,
+            0.7368496240601503,
+            0.825189393939394,
+            0.8743340163934425,
+            0.9105285210232286,
+            0.9575837320574162,
+            0.9736876550013778
+          ]
+        }
+      }
+    },
+    {
+      "epoch": 100,
+      "label": "epoch_100",
+      "weights": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\yolo11s_full_25d\\weights\\checkpoint_e100.pt",
+      "weights_sha256": "7a8d33264453e52b78a7fd68805e4c382c8dc2c0c2942a45c10aa3873676b866",
+      "evaluation_dir": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\full_validation\\epoch_100",
+      "yolo_only": {
+        "sensitivity_at_1_fp_per_scan": 0.8547486033519553,
+        "sensitivity_at_1_ci95": [
+          0.7719101859125425,
+          0.9064327485380117
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.5938411355018616,
+          "TP": 153,
+          "FP": 122,
+          "FN": 26,
+          "sensitivity": 0.8547486033519553,
+          "fp_per_scan": 0.976,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.4581005586592179,
+            "ci95": [
+              0.2954399766899767,
+              0.602888903905933
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.6536312849162011,
+            "ci95": [
+              0.4421814199201134,
+              0.7911449321555414
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.776536312849162,
+            "ci95": [
+              0.6958651682453294,
+              0.8514543325526932
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8547486033519553,
+            "ci95": [
+              0.7719101859125425,
+              0.9064327485380117
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.88268156424581,
+            "ci95": [
+              0.8323699421965318,
+              0.930827593091744
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.888268156424581,
+            "ci95": [
+              0.8426818450620934,
+              0.9500154320987654
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9329608938547486,
+            "ci95": [
+              0.8961606016933886,
+              0.9685904777486911
+            ]
+          }
+        ],
+        "validation_cpm": 0.7781324820430966,
+        "candidate_pool_hits": 174,
+        "candidate_pool_misses": 5,
+        "maximum_candidate_pool_sensitivity": 0.9720670391061452,
+        "ignored_excluded_candidates": 776,
+        "duplicate_hits_ignored": 160,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 2.2737367544323206e-13,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.2954399766899767,
+            0.4421814199201134,
+            0.6958651682453294,
+            0.7719101859125425,
+            0.8323699421965318,
+            0.8426818450620934,
+            0.8961606016933886
+          ],
+          "upper": [
+            0.602888903905933,
+            0.7911449321555414,
+            0.8514543325526932,
+            0.9064327485380117,
+            0.930827593091744,
+            0.9500154320987654,
+            0.9685904777486911
+          ]
+        }
+      },
+      "new_two_stage": {
+        "sensitivity_at_1_fp_per_scan": 0.8268156424581006,
+        "sensitivity_at_1_ci95": [
+          0.7351241036955323,
+          0.8800108695652173
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.35555634288763827,
+          "TP": 148,
+          "FP": 124,
+          "FN": 31,
+          "sensitivity": 0.8268156424581006,
+          "fp_per_scan": 0.992,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.5139664804469274,
+            "ci95": [
+              0.41299516908212563,
+              0.6566394148020653
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.6480446927374302,
+            "ci95": [
+              0.5157208136792453,
+              0.7297449134527786
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.7150837988826816,
+            "ci95": [
+              0.6435144716394716,
+              0.8034707886044591
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8268156424581006,
+            "ci95": [
+              0.7351241036955323,
+              0.8800108695652173
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8547486033519553,
+            "ci95": [
+              0.8034682080924855,
+              0.9137977382276604
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9162011173184358,
+            "ci95": [
+              0.875,
+              0.9583394970414202
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9385474860335196,
+            "ci95": [
+              0.9023249131248329,
+              0.9738312785002533
+            ]
+          }
+        ],
+        "validation_cpm": 0.7733439744612929,
+        "candidate_pool_hits": 174,
+        "candidate_pool_misses": 5,
+        "maximum_candidate_pool_sensitivity": 0.9720670391061452,
+        "ignored_excluded_candidates": 776,
+        "duplicate_hits_ignored": 160,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 5.684341886080802e-14,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.41299516908212563,
+            0.5157208136792453,
+            0.6435144716394716,
+            0.7351241036955323,
+            0.8034682080924855,
+            0.875,
+            0.9023249131248329
+          ],
+          "upper": [
+            0.6566394148020653,
+            0.7297449134527786,
+            0.8034707886044591,
+            0.8800108695652173,
+            0.9137977382276604,
+            0.9583394970414202,
+            0.9738312785002533
+          ]
+        }
+      },
+      "old_two_stage": {
+        "sensitivity_at_1_fp_per_scan": 0.8212290502793296,
+        "sensitivity_at_1_ci95": [
+          0.7557936046511629,
+          0.87501495215311
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.3876505468692315,
+          "TP": 147,
+          "FP": 124,
+          "FN": 32,
+          "sensitivity": 0.8212290502793296,
+          "fp_per_scan": 0.992,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.5418994413407822,
+            "ci95": [
+              0.40860215053763443,
+              0.6500601604278075
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.6256983240223464,
+            "ci95": [
+              0.5231525606811539,
+              0.7386544970986461
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.7262569832402235,
+            "ci95": [
+              0.6451554464703132,
+              0.8165230272017237
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8212290502793296,
+            "ci95": [
+              0.7557936046511629,
+              0.87501495215311
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8547486033519553,
+            "ci95": [
+              0.7988943458316713,
+              0.9068834841628959
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9106145251396648,
+            "ci95": [
+              0.8678094313770267,
+              0.9580430048992923
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9385474860335196,
+            "ci95": [
+              0.9020914668153932,
+              0.9735711801530258
+            ]
+          }
+        ],
+        "validation_cpm": 0.7741420590582602,
+        "candidate_pool_hits": 174,
+        "candidate_pool_misses": 5,
+        "maximum_candidate_pool_sensitivity": 0.9720670391061452,
+        "ignored_excluded_candidates": 776,
+        "duplicate_hits_ignored": 160,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 2.2737367544323206e-13,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.40860215053763443,
+            0.5231525606811539,
+            0.6451554464703132,
+            0.7557936046511629,
+            0.7988943458316713,
+            0.8678094313770267,
+            0.9020914668153932
+          ],
+          "upper": [
+            0.6500601604278075,
+            0.7386544970986461,
+            0.8165230272017237,
+            0.87501495215311,
+            0.9068834841628959,
+            0.9580430048992923,
+            0.9735711801530258
+          ]
+        }
+      }
+    },
+    {
+      "epoch": 28,
+      "label": "best_map",
+      "weights": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\yolo11s_full_25d\\weights\\best.pt",
+      "weights_sha256": "7b14f1ef8ff25cda2ae50175902f6bd78c64142f8b4709b7a225ce30c3277194",
+      "evaluation_dir": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\full_validation\\best_map",
+      "yolo_only": {
+        "sensitivity_at_1_fp_per_scan": 0.7988826815642458,
+        "sensitivity_at_1_ci95": [
+          0.7340248226950354,
+          0.866319073083779
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.54091477394104,
+          "TP": 143,
+          "FP": 118,
+          "FN": 36,
+          "sensitivity": 0.7988826815642458,
+          "fp_per_scan": 0.944,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.4134078212290503,
+            "ci95": [
+              0.3313281546040167,
+              0.5715468306527908
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.5698324022346368,
+            "ci95": [
+              0.4148839708962628,
+              0.7116639437183249
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.6983240223463687,
+            "ci95": [
+              0.6009297269354741,
+              0.8061145703611456
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.7988826815642458,
+            "ci95": [
+              0.7340248226950354,
+              0.866319073083779
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8547486033519553,
+            "ci95": [
+              0.7840866263133851,
+              0.910828025477707
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9106145251396648,
+            "ci95": [
+              0.8589506172839506,
+              0.9593082067482189
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9329608938547486,
+            "ci95": [
+              0.8888741134751773,
+              0.9760619112651889
+            ]
+          }
+        ],
+        "validation_cpm": 0.7398244213886672,
+        "candidate_pool_hits": 174,
+        "candidate_pool_misses": 5,
+        "maximum_candidate_pool_sensitivity": 0.9720670391061452,
+        "ignored_excluded_candidates": 1184,
+        "duplicate_hits_ignored": 196,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 2.2737367544323206e-13,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.3313281546040167,
+            0.4148839708962628,
+            0.6009297269354741,
+            0.7340248226950354,
+            0.7840866263133851,
+            0.8589506172839506,
+            0.8888741134751773
+          ],
+          "upper": [
+            0.5715468306527908,
+            0.7116639437183249,
+            0.8061145703611456,
+            0.866319073083779,
+            0.910828025477707,
+            0.9593082067482189,
+            0.9760619112651889
+          ]
+        }
+      },
+      "new_two_stage": {
+        "sensitivity_at_1_fp_per_scan": 0.7877094972067039,
+        "sensitivity_at_1_ci95": [
+          0.7032639545884579,
+          0.8554423945783132
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.3358468982079472,
+          "TP": 141,
+          "FP": 124,
+          "FN": 38,
+          "sensitivity": 0.7877094972067039,
+          "fp_per_scan": 0.992,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.5027932960893855,
+            "ci95": [
+              0.4012729024140914,
+              0.653858024691358
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.6368715083798883,
+            "ci95": [
+              0.4942153923038481,
+              0.7152879901960785
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.6983240223463687,
+            "ci95": [
+              0.6118401702786377,
+              0.7777927927927928
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.7877094972067039,
+            "ci95": [
+              0.7032639545884579,
+              0.8554423945783132
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8715083798882681,
+            "ci95": [
+              0.8140674301741264,
+              0.9212587412587413
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9050279329608939,
+            "ci95": [
+              0.8571428571428571,
+              0.9537594486438418
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9273743016759777,
+            "ci95": [
+              0.8846153846153846,
+              0.9751565628047841
+            ]
+          }
+        ],
+        "validation_cpm": 0.7613727055067837,
+        "candidate_pool_hits": 174,
+        "candidate_pool_misses": 5,
+        "maximum_candidate_pool_sensitivity": 0.9720670391061452,
+        "ignored_excluded_candidates": 1184,
+        "duplicate_hits_ignored": 196,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 1.1368683772161603e-13,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.4012729024140914,
+            0.4942153923038481,
+            0.6118401702786377,
+            0.7032639545884579,
+            0.8140674301741264,
+            0.8571428571428571,
+            0.8846153846153846
+          ],
+          "upper": [
+            0.653858024691358,
+            0.7152879901960785,
+            0.7777927927927928,
+            0.8554423945783132,
+            0.9212587412587413,
+            0.9537594486438418,
+            0.9751565628047841
+          ]
+        }
+      },
+      "old_two_stage": {
+        "sensitivity_at_1_fp_per_scan": 0.770949720670391,
+        "sensitivity_at_1_ci95": [
+          0.7101964586339586,
+          0.8497256931224256
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.4210810947489918,
+          "TP": 138,
+          "FP": 94,
+          "FN": 41,
+          "sensitivity": 0.770949720670391,
+          "fp_per_scan": 0.752,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.48044692737430167,
+            "ci95": [
+              0.35400276052449964,
+              0.6305983908816627
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.5977653631284916,
+            "ci95": [
+              0.4591049240681086,
+              0.723103448275862
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.6871508379888268,
+            "ci95": [
+              0.6061710695876288,
+              0.7865466700144372
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.770949720670391,
+            "ci95": [
+              0.7101964586339586,
+              0.8497256931224256
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8603351955307262,
+            "ci95": [
+              0.7958025940028557,
+              0.9161801397205589
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.8994413407821229,
+            "ci95": [
+              0.8452301375095492,
+              0.9485832575068244
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9385474860335196,
+            "ci95": [
+              0.8933915712430646,
+              0.9824637023593465
+            ]
+          }
+        ],
+        "validation_cpm": 0.7478052673583402,
+        "candidate_pool_hits": 174,
+        "candidate_pool_misses": 5,
+        "maximum_candidate_pool_sensitivity": 0.9720670391061452,
+        "ignored_excluded_candidates": 1184,
+        "duplicate_hits_ignored": 196,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 1.1368683772161603e-13,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.35400276052449964,
+            0.4591049240681086,
+            0.6061710695876288,
+            0.7101964586339586,
+            0.7958025940028557,
+            0.8452301375095492,
+            0.8933915712430646
+          ],
+          "upper": [
+            0.6305983908816627,
+            0.723103448275862,
+            0.7865466700144372,
+            0.8497256931224256,
+            0.9161801397205589,
+            0.9485832575068244,
+            0.9824637023593465
+          ]
+        }
+      }
+    },
+    {
+      "epoch": 100,
+      "label": "last",
+      "weights": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\yolo11s_full_25d\\weights\\last.pt",
+      "weights_sha256": "fe48d0dda6f0535a7d9c1e72735cc518dccd6eb68d6ee5e25b16b72b2a31a10d",
+      "evaluation_dir": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\full_validation\\last",
+      "yolo_only": {
+        "sensitivity_at_1_fp_per_scan": 0.8547486033519553,
+        "sensitivity_at_1_ci95": [
+          0.7719101859125425,
+          0.9064327485380117
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.5938411355018616,
+          "TP": 153,
+          "FP": 122,
+          "FN": 26,
+          "sensitivity": 0.8547486033519553,
+          "fp_per_scan": 0.976,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.4581005586592179,
+            "ci95": [
+              0.2954399766899767,
+              0.602888903905933
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.6536312849162011,
+            "ci95": [
+              0.4421814199201134,
+              0.7911449321555414
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.776536312849162,
+            "ci95": [
+              0.6958651682453294,
+              0.8514543325526932
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8547486033519553,
+            "ci95": [
+              0.7719101859125425,
+              0.9064327485380117
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.88268156424581,
+            "ci95": [
+              0.8323699421965318,
+              0.930827593091744
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.888268156424581,
+            "ci95": [
+              0.8426818450620934,
+              0.9500154320987654
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9329608938547486,
+            "ci95": [
+              0.8961606016933886,
+              0.9685904777486911
+            ]
+          }
+        ],
+        "validation_cpm": 0.7781324820430966,
+        "candidate_pool_hits": 174,
+        "candidate_pool_misses": 5,
+        "maximum_candidate_pool_sensitivity": 0.9720670391061452,
+        "ignored_excluded_candidates": 776,
+        "duplicate_hits_ignored": 160,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 2.2737367544323206e-13,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.2954399766899767,
+            0.4421814199201134,
+            0.6958651682453294,
+            0.7719101859125425,
+            0.8323699421965318,
+            0.8426818450620934,
+            0.8961606016933886
+          ],
+          "upper": [
+            0.602888903905933,
+            0.7911449321555414,
+            0.8514543325526932,
+            0.9064327485380117,
+            0.930827593091744,
+            0.9500154320987654,
+            0.9685904777486911
+          ]
+        }
+      },
+      "new_two_stage": {
+        "sensitivity_at_1_fp_per_scan": 0.8268156424581006,
+        "sensitivity_at_1_ci95": [
+          0.7351241036955323,
+          0.8800108695652173
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.35555634288763827,
+          "TP": 148,
+          "FP": 124,
+          "FN": 31,
+          "sensitivity": 0.8268156424581006,
+          "fp_per_scan": 0.992,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.5139664804469274,
+            "ci95": [
+              0.41299516908212563,
+              0.6566394148020653
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.6480446927374302,
+            "ci95": [
+              0.5157208136792453,
+              0.7297449134527786
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.7150837988826816,
+            "ci95": [
+              0.6435144716394716,
+              0.8034707886044591
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8268156424581006,
+            "ci95": [
+              0.7351241036955323,
+              0.8800108695652173
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8547486033519553,
+            "ci95": [
+              0.8034682080924855,
+              0.9137977382276604
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9162011173184358,
+            "ci95": [
+              0.875,
+              0.9583394970414202
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9385474860335196,
+            "ci95": [
+              0.9023249131248329,
+              0.9738312785002533
+            ]
+          }
+        ],
+        "validation_cpm": 0.7733439744612929,
+        "candidate_pool_hits": 174,
+        "candidate_pool_misses": 5,
+        "maximum_candidate_pool_sensitivity": 0.9720670391061452,
+        "ignored_excluded_candidates": 776,
+        "duplicate_hits_ignored": 160,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 5.684341886080802e-14,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.41299516908212563,
+            0.5157208136792453,
+            0.6435144716394716,
+            0.7351241036955323,
+            0.8034682080924855,
+            0.875,
+            0.9023249131248329
+          ],
+          "upper": [
+            0.6566394148020653,
+            0.7297449134527786,
+            0.8034707886044591,
+            0.8800108695652173,
+            0.9137977382276604,
+            0.9583394970414202,
+            0.9738312785002533
+          ]
+        }
+      },
+      "old_two_stage": {
+        "sensitivity_at_1_fp_per_scan": 0.8212290502793296,
+        "sensitivity_at_1_ci95": [
+          0.7557936046511629,
+          0.87501495215311
+        ],
+        "actual_threshold_at_or_below_1_fp_per_scan": {
+          "threshold": 0.3876505468692315,
+          "TP": 147,
+          "FP": 124,
+          "FN": 32,
+          "sensitivity": 0.8212290502793296,
+          "fp_per_scan": 0.992,
+          "scans": 125,
+          "reference_nodules": 179,
+          "maximum_fp_per_scan": 1.0
+        },
+        "seven_point_sensitivity": [
+          {
+            "fp_per_scan": 0.125,
+            "sensitivity": 0.5418994413407822,
+            "ci95": [
+              0.40860215053763443,
+              0.6500601604278075
+            ]
+          },
+          {
+            "fp_per_scan": 0.25,
+            "sensitivity": 0.6256983240223464,
+            "ci95": [
+              0.5231525606811539,
+              0.7386544970986461
+            ]
+          },
+          {
+            "fp_per_scan": 0.5,
+            "sensitivity": 0.7262569832402235,
+            "ci95": [
+              0.6451554464703132,
+              0.8165230272017237
+            ]
+          },
+          {
+            "fp_per_scan": 1.0,
+            "sensitivity": 0.8212290502793296,
+            "ci95": [
+              0.7557936046511629,
+              0.87501495215311
+            ]
+          },
+          {
+            "fp_per_scan": 2.0,
+            "sensitivity": 0.8547486033519553,
+            "ci95": [
+              0.7988943458316713,
+              0.9068834841628959
+            ]
+          },
+          {
+            "fp_per_scan": 4.0,
+            "sensitivity": 0.9106145251396648,
+            "ci95": [
+              0.8678094313770267,
+              0.9580430048992923
+            ]
+          },
+          {
+            "fp_per_scan": 8.0,
+            "sensitivity": 0.9385474860335196,
+            "ci95": [
+              0.9020914668153932,
+              0.9735711801530258
+            ]
+          }
+        ],
+        "validation_cpm": 0.7741420590582602,
+        "candidate_pool_hits": 174,
+        "candidate_pool_misses": 5,
+        "maximum_candidate_pool_sensitivity": 0.9720670391061452,
+        "ignored_excluded_candidates": 776,
+        "duplicate_hits_ignored": 160,
+        "overlapping_included_marks": 0,
+        "official_full_curve_parity": true,
+        "parity_fp_axes_normalized_to_integer_counts": true,
+        "official_fp_integer_roundoff_max": 2.2737367544323206e-13,
+        "bootstrap": {
+          "repeats": 1000,
+          "seed": 20261012,
+          "sampling_unit": "whole CT scan with replacement",
+          "lower": [
+            0.40860215053763443,
+            0.5231525606811539,
+            0.6451554464703132,
+            0.7557936046511629,
+            0.7988943458316713,
+            0.8678094313770267,
+            0.9020914668153932
+          ],
+          "upper": [
+            0.6500601604278075,
+            0.7386544970986461,
+            0.8165230272017237,
+            0.87501495215311,
+            0.9068834841628959,
+            0.9580430048992923,
+            0.9735711801530258
+          ]
+        }
+      }
+    }
+  ],
+  "best_epoch": 90,
+  "best_label": "epoch_090",
+  "best_weights": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\yolo11s_full_25d\\weights\\checkpoint_e090.pt",
+  "best_weights_sha256": "113745200823401dcb8e5469dbfb797a23d814b16a579d8b81413135f1ba587c",
+  "best_metrics": {
+    "sensitivity_at_1_fp_per_scan": 0.8603351955307262,
+    "sensitivity_at_1_ci95": [
+      0.7803148944750639,
+      0.9109598006167969
+    ],
+    "actual_threshold_at_or_below_1_fp_per_scan": {
+      "threshold": 0.5705289244651794,
+      "TP": 154,
+      "FP": 121,
+      "FN": 25,
+      "sensitivity": 0.8603351955307262,
+      "fp_per_scan": 0.968,
+      "scans": 125,
+      "reference_nodules": 179,
+      "maximum_fp_per_scan": 1.0
+    },
+    "seven_point_sensitivity": [
+      {
+        "fp_per_scan": 0.125,
+        "sensitivity": 0.44692737430167595,
+        "ci95": [
+          0.3076687116564417,
+          0.6169102192965061
+        ]
+      },
+      {
+        "fp_per_scan": 0.25,
+        "sensitivity": 0.6368715083798883,
+        "ci95": [
+          0.4410054347826087,
+          0.7880539297658862
+        ]
+      },
+      {
+        "fp_per_scan": 0.5,
+        "sensitivity": 0.7597765363128491,
+        "ci95": [
+          0.6914701688966879,
+          0.8481754719974616
+        ]
+      },
+      {
+        "fp_per_scan": 1.0,
+        "sensitivity": 0.8603351955307262,
+        "ci95": [
+          0.7803148944750639,
+          0.9109598006167969
+        ]
+      },
+      {
+        "fp_per_scan": 2.0,
+        "sensitivity": 0.88268156424581,
+        "ci95": [
+          0.8323455773625488,
+          0.9306403824481041
+        ]
+      },
+      {
+        "fp_per_scan": 4.0,
+        "sensitivity": 0.8994413407821229,
+        "ci95": [
+          0.8456679894179894,
+          0.9551305970149254
+        ]
+      },
+      {
+        "fp_per_scan": 8.0,
+        "sensitivity": 0.9385474860335196,
+        "ci95": [
+          0.8979520645467489,
+          0.9746914556962025
+        ]
+      }
+    ],
+    "validation_cpm": 0.7749401436552275,
+    "candidate_pool_hits": 172,
+    "candidate_pool_misses": 7,
+    "maximum_candidate_pool_sensitivity": 0.9608938547486033,
+    "ignored_excluded_candidates": 800,
+    "duplicate_hits_ignored": 162,
+    "overlapping_included_marks": 0,
+    "official_full_curve_parity": true,
+    "parity_fp_axes_normalized_to_integer_counts": true,
+    "official_fp_integer_roundoff_max": 1.4210854715202004e-14,
+    "bootstrap": {
+      "repeats": 1000,
+      "seed": 20261012,
+      "sampling_unit": "whole CT scan with replacement",
+      "lower": [
+        0.3076687116564417,
+        0.4410054347826087,
+        0.6914701688966879,
+        0.7803148944750639,
+        0.8323455773625488,
+        0.8456679894179894,
+        0.8979520645467489
+      ],
+      "upper": [
+        0.6169102192965061,
+        0.7880539297658862,
+        0.8481754719974616,
+        0.9109598006167969,
+        0.9306403824481041,
+        0.9551305970149254,
+        0.9746914556962025
+      ]
+    }
+  },
+  "best_evaluation_dir": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\full_validation\\epoch_090",
+  "checks_without_improvement": 1,
+  "selection_rule": "Maximum full-validation YOLO-only sensitivity at 1 FP/scan; seven-point CPM breaks exact ties",
+  "full_evaluation_interval": 10,
+  "first_full_epoch": 20,
+  "full_validation_patience_checks": 3,
+  "min_stop_epoch": 50
+}

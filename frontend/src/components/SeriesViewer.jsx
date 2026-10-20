@@ -1,163 +1,98 @@
-import { useRef, useEffect, useState, useMemo } from 'react'
+import { useState, useMemo } from 'react'
+import SliceCanvas from './SliceCanvas'
+import ThreeSliceDialog from './ThreeSliceDialog'
+import PixelSpacingControls from './PixelSpacingControls'
+import { makeReferences, referenceBoxesAt, layerLabel, formatVector, estimateBoxSize, calibrateDetectionSize } from '../seriesUtils'
 
-const LABEL_COLORS = {
-  '肺结节 (Nodule)': '#FF3B30',
-  'nodule': '#FF3B30',
-}
+export default function SeriesViewer({ slices, result, references: rawReferences = [], mode }) {
+  const geometry = result.geometry
+  const [calibration, setCalibration] = useState(null)
+  const references = useMemo(() => makeReferences(rawReferences, geometry), [rawReferences, geometry])
+  const rawBySlice = mode === 'all' ? result.all_by_slice : result.detections_by_slice
+  const bySlice = useMemo(() => Object.fromEntries(Object.entries(rawBySlice || {}).map(([key, values]) =>
+    [key, values.map(det => calibrateDetectionSize(det, calibration, result.image_dims))])), [rawBySlice, calibration, result.image_dims])
+  const candidates = useMemo(() => Object.values(bySlice || {}).flat().map(d => ({ ...d, kind: 'prediction' }))
+    .sort((a, b) => b.yolo_score - a.yolo_score), [bySlice])
+  const [currentIdx, setCurrentIdx] = useState(candidates[0]?.slice_index ?? 0)
+  const [selection, setSelection] = useState(null)
+  const [displayMode, setDisplayMode] = useState(references.length ? 'overlay' : 'prediction')
+  const currentDets = bySlice?.[String(currentIdx)] || []
+  const currentReferences = useMemo(() => referenceBoxesAt(references, geometry, currentIdx), [references, geometry, currentIdx])
+  const hasDetections = useMemo(() => new Set(candidates.map(d => d.slice_index)), [candidates])
 
-/**
- * SeriesViewer — 连续 CT 切片 2.5D 检测结果浏览器
- *
- * Props:
- *   slices: [{dataUrl, filename}] — 所有切片
- *   detectionsBySlice: {"0": [...], "1": [...]}
- *   modelName: string
- *   inferenceTime: number (ms)
- */
-export default function SeriesViewer({ slices, detectionsBySlice, modelName, inferenceTime }) {
-  const [currentIdx, setCurrentIdx] = useState(0)
-  const canvasRef = useRef(null)
-  const containerRef = useRef(null)
-
-  const N = slices.length
-  const currentDets = detectionsBySlice[String(currentIdx)] || []
-
-  // 哪些层有检测
-  const hasDetections = useMemo(() => {
-    const set = new Set()
-    Object.entries(detectionsBySlice).forEach(([key, dets]) => {
-      if (dets.length > 0) set.add(Number(key))
-    })
-    return set
-  }, [detectionsBySlice])
-
-  // 初始化：跳到第一个有检测的层
-  useEffect(() => {
-    const first = [...hasDetections].sort((a, b) => a - b)[0]
-    if (first != null) setCurrentIdx(first)
-  }, [])
-
-  // 画当前层 + bbox
-  useEffect(() => {
-    const canvas = canvasRef.current
-    const container = containerRef.current
-    if (!canvas || !container) return
-
-    const img = new Image()
-    img.onload = () => {
-      const maxW = container.clientWidth
-      const scale = Math.min(1, maxW / img.naturalWidth)
-      canvas.width = img.naturalWidth * scale
-      canvas.height = img.naturalHeight * scale
-
-      const ctx = canvas.getContext('2d')
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-
-      currentDets.forEach((det) => {
-        const { x, y, width, height } = det.bbox
-        const bx = x * scale, by = y * scale
-        const bw = width * scale, bh = height * scale
-        const color = LABEL_COLORS[det.label] || '#34C759'
-
-        ctx.fillStyle = color + '18'
-        ctx.fillRect(bx, by, bw, bh)
-        ctx.lineWidth = 2.5
-        ctx.strokeStyle = color
-        ctx.strokeRect(bx, by, bw, bh)
-
-        // 角标
-        const cs = Math.min(14, bw * 0.3, bh * 0.3)
-        ctx.lineWidth = 2
-        ;[[bx,by,1,0],[bx+bw,by,-1,0],[bx,by+bh,1,1],[bx+bw,by+bh,-1,1]]
-          .forEach(([cx,cy,sx,sy]) => {
-            ctx.beginPath()
-            ctx.moveTo(cx, cy + (sy ? -cs : cs))
-            ctx.lineTo(cx, cy)
-            ctx.lineTo(cx + (sx < 0 ? -cs : cs), cy)
-            ctx.stroke()
-          })
-
-        // 标签
-        const pct = (det.confidence * 100).toFixed(0) + '%'
-        ctx.font = `bold ${Math.max(11, 13*scale)}px sans-serif`
-        const tm = ctx.measureText(pct)
-        const lx = bx, ly = by - 19 > 0 ? by - 19 : by + 2
-        ctx.fillStyle = color
-        ctx.fillRect(lx, ly, tm.width + 10, 18)
-        ctx.fillStyle = '#fff'
-        ctx.textBaseline = 'middle'
-        ctx.fillText(pct, lx + 5, ly + 9)
-      })
+  function select(kind, target, index = currentIdx) {
+    if (index < 0) return
+    let chosen = target
+    if (kind === 'reference') {
+      chosen = referenceBoxesAt([target], geometry, index)[0]
+      if (!chosen) return
     }
-    img.src = slices[currentIdx]?.dataUrl
-  }, [currentIdx, currentDets, slices])
-
+    setCurrentIdx(index); setSelection({ kind, target: chosen, index })
+  }
+  function selectFromCanvas({ kind, target }) { select(kind, target, kind === 'reference' ? target.slice_index : currentIdx) }
   return (
-    <div className="viewer">
-      <div className="viewer-header">
-        <span className="viewer-title">
-          Slice {currentIdx + 1} / {N}
-          {hasDetections.has(currentIdx)
-            ? ` — ${currentDets.length} 处疑似病灶`
-            : ' — 当前层未检测到疑似结节'}
-        </span>
-        <span className="viewer-meta">{modelName} · {inferenceTime?.toFixed(0)}ms</span>
-      </div>
-
-      <div className="canvas-container" ref={containerRef}>
-        <canvas ref={canvasRef} style={{ maxWidth: '100%' }} />
-      </div>
-
-      {/* 滑动条 */}
-      <div className="slider-container">
-        <input
-          type="range"
-          min={0}
-          max={N - 1}
-          value={currentIdx}
-          onChange={(e) => setCurrentIdx(Number(e.target.value))}
-          className="slice-slider"
-        />
-        <div className="slider-ticks">
-          {slices.map((_, i) => (
-            <div
-              key={i}
-              className={`slider-tick ${i === currentIdx ? 'active' : ''} ${hasDetections.has(i) ? 'has-det' : ''}`}
-              onClick={() => setCurrentIdx(i)}
-            />
-          ))}
+    <div className="results-layout">
+      <div className="viewer-panel">
+        <div className="viewer">
+          <div className="viewer-header"><div><h2 className="viewer-title">{layerLabel(geometry, currentIdx)} / {slices.length} 层</h2>
+            <p className="viewer-meta">{slices[currentIdx]?.filename} · {result.model_name}</p></div>
+            <span className="viewer-meta">{(result.inference_time_ms / 1000).toFixed(1)} 秒</span></div>
+          <div className="view-controls">
+            {['prediction', 'reference', 'overlay'].map(value => <button key={value}
+              disabled={value !== 'prediction' && references.length === 0}
+              className={displayMode === value ? 'active' : ''} onClick={() => setDisplayMode(value)}>
+              {{ prediction: '预测', reference: '参考标注', overlay: '叠加比较' }[value]}</button>)}
+          </div>
+          <p className="legend"><span className="prediction-key">橙色：预测</span><span className="reference-key">蓝色：参考</span>
+            <span>点击框或右侧列表，查看三切片</span></p>
+          <div className="canvas-container"><SliceCanvas slice={slices[currentIdx]}
+            predictions={displayMode === 'reference' ? [] : currentDets}
+            references={displayMode === 'prediction' ? [] : currentReferences}
+            onSelect={selectFromCanvas} label="CT 全图，点击候选框查看三切片定位" /></div>
+          <div className="slider-container">
+            <label className="slider-label" htmlFor="slice-slider">浏览切片</label>
+            <input id="slice-slider" type="range" min={0} max={slices.length - 1} value={currentIdx}
+              onChange={e => setCurrentIdx(Number(e.target.value))} className="slice-slider" />
+            <div className="slider-ticks">{slices.map((_, index) => <button key={index}
+              aria-label={'跳到第 ' + (index + 1) + ' 层'} className={'slider-tick ' + (index === currentIdx ? 'active ' : '') + (hasDetections.has(index) ? 'has-det' : '')}
+              onClick={() => setCurrentIdx(index)} />)}</div>
+            <div className="slice-navigation"><button disabled={currentIdx === 0} onClick={() => setCurrentIdx(currentIdx - 1)}>上一层</button>
+              <span>第 {currentIdx + 1} / {slices.length} 层</span><button disabled={currentIdx === slices.length - 1} onClick={() => setCurrentIdx(currentIdx + 1)}>下一层</button></div>
+          </div>
+          <p className="v3-summary-bar">{result.grouping_applied ? '三维合并后保留 ' + result.candidates.length + ' 个候选' : '保留 ' + result.summary.total_kept + ' 个逐层候选框；相邻层可能重复'}
+            {' · '}当前层 {currentDets.length} 个候选</p>
+          {!geometry && <PixelSpacingControls calibration={calibration} onChange={setCalibration} imageDims={result.image_dims} />}
+          <p className="viewer-note">{geometry ? '病例 ' + geometry.seriesuid + '。' + (geometry.complete_volume ? '已上传完整体积切片。' : '当前仅上传部分体积；边界上下文可能不完整。') :
+            calibration ? '尺寸已按像素间距换算为 mm；层号按上传顺序显示。' : '请导入或填写像素间距，将估计直径和半径换算为 mm。'}</p>
         </div>
       </div>
-
-      {/* 检测列表 */}
-      {currentDets.length > 0 && (
-        <ul className="detection-list">
-          {currentDets.map((det) => (
-            <li key={det.id} className="detection-item">
-              <span className="color-dot"
-                style={{ background: LABEL_COLORS[det.label] || '#34C759' }} />
-              <div className="det-info">
-                <strong>{det.label}</strong>
-                <span className="det-desc">{det.description}</span>
-              </div>
-              <div className="det-meta">
-                <span className="det-confidence">{(det.confidence * 100).toFixed(0)}%</span>
-                <span className="det-size">
-                  {det.size_mm?.width != null
-                    ? `${det.size_mm.width} x ${det.size_mm.height} mm`
-                    : '尺寸未知'}
-                </span>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
-
-      {currentDets.length === 0 && (
-        <div style={{ padding: '16px', textAlign: 'center', color: '#5a6070', fontSize: '0.9rem' }}>
-          当前层未检测到明显疑似结节
-        </div>
-      )}
+      <aside className="info-panel">
+        <section className="location-panel"><h2>预测候选</h2><p className="panel-intro">点击候选，直接定位并展开三切片。</p>
+          <div className="target-list">{candidates.map((det, i) => {
+            const size = estimateBoxSize(det)
+            return <button key={det.id} className={'target-button ' + (det.keep === false ? 'filtered-out' : '')}
+            onClick={() => select('prediction', det, det.slice_index)}>
+            <span className="target-title">候选 {i + 1}<strong>{(det.yolo_score * 100).toFixed(1)}%</strong></span>
+            <span>{layerLabel(geometry, det.slice_index)}{det.keep === false ? ' · 已排除' : ''}</span>
+            <span>{size.unit === 'mm' ? '估计直径 ' + size.diameter.toFixed(2) + ' mm · 半径 ' + size.radius.toFixed(2) + ' mm' : '填写像素间距后显示毫米尺寸'}</span>
+          </button>})}</div>
+          {!candidates.length && <p className="empty-message">没有超过当前阈值的候选。仍可浏览切片或定位参考标注。</p>}
+        </section>
+        <section className="location-panel"><h2>参考结节</h2>
+          <p className="panel-intro">由标注中心与直径派生参考框。</p>
+          {references.map(item => <button key={item.id} className="target-button reference-target" disabled={item.slice_index < 0}
+            onClick={() => select('reference', item, item.slice_index)}>
+            <span className="target-title">{item.label}<strong>{item.diameter_mm.toFixed(2)} mm</strong></span>
+            <span>{item.slice_index < 0 ? '标注中心不在当前上传范围' : layerLabel(geometry, item.slice_index)}</span>
+            <span>世界坐标 {formatVector(item.world_mm)} mm</span>
+          </button>)}
+          {!references.length && <p className="empty-message">未加载可对应的参考标注。可打开带标注演示病例，或在上传切片前选择元数据和标注 JSON。</p>}
+        </section>
+      </aside>
+      {selection && <ThreeSliceDialog selection={{ ...selection, target: selection.kind === 'prediction' ? calibrateDetectionSize(selection.target, calibration, result.image_dims) : selection.target }} slices={slices} detections={bySlice || {}}
+        references={references} geometry={geometry} imageDims={result.image_dims}
+        calibration={calibration} onCalibrationChange={setCalibration}
+        displayMode={displayMode} onDisplayModeChange={setDisplayMode} onClose={() => setSelection(null)} />}
     </div>
   )
 }

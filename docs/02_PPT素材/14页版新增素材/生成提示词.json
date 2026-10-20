@@ -1,0 +1,7 @@
+{
+  "tool": "built-in image_gen",
+  "prompt": "Create a precise minimal scientific educational illustration for a university presentation about nodule-center matching. White background, navy, cyan and warm amber palette. Landscape 2:1 composition with two separate simple reference regions side by side, with ample whitespace. Each reference region is a thin teal circular cross section of a spherical target, with a very small navy point at the exact geometric center. In the LEFT example, a warm amber predicted-center point is clearly inside the circle, halfway between the navy center and the boundary. A straight dashed navy radius line goes from the true center to the circle boundary in a different direction. In the RIGHT example, an amber predicted-center point is clearly OUTSIDE the circle, at about 1.4 times the radius from the navy center. A straight fine gray line connects the two points in each example. Reference circles are equal size. No boxes, no rectangles, no CT imagery, no patient, no UI, no data chart, no letters, numbers, formulas, captions or text. This is a conceptual two-dimensional cross-section illustration only; the presentation will explain that the actual matching uses three-dimensional distance in millimeters. Draw the circles and the point locations exactly as specified, avoid decorative elements.",
+  "file": "中心半径命中示意.png",
+  "use": "第9页概念示意，实际使用三维毫米距离",
+  "model_version": "工具未公开具体版本"
+}

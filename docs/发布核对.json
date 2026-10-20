@@ -1,0 +1,22 @@
+{
+  "version": "3.3.0",
+  "verified_on": "2026-10-20",
+  "status": "passed",
+  "frontend_production_build": "passed",
+  "backend_health": "ok",
+  "device": "cuda",
+  "yolo_loaded": true,
+  "resnet_loaded": true,
+  "selected_epoch": 90,
+  "yolo_sha256": "f54e50f3c0af5585b8ce894d7eaa421ddf58306c0339dd2ef00912e454c5b1ee",
+  "full_demo_slices": 143,
+  "full_demo_retained_candidates": 9,
+  "geometry_grouping": true,
+  "invalid_slice_count_rejected": true,
+  "invalid_metadata_rejected": true,
+  "python_sources_parsed": 28,
+  "copied_materials_hash_verified": 70,
+  "main_ppt_slides": 14,
+  "model_archive_offline_install": "passed",
+  "report_and_ppt_zip_integrity": "passed"
+}

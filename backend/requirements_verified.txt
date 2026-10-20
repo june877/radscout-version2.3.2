@@ -1,0 +1,11 @@
+torch==2.11.0+cu128
+torchvision==0.26.0+cu128
+ultralytics==8.4.60
+SimpleITK==2.5.5
+numpy==2.4.6
+pandas==3.0.3
+Pillow==12.2.0
+opencv-python==4.13.0.92
+fastapi==0.136.1
+uvicorn==0.46.0
+scikit-learn==1.8.0

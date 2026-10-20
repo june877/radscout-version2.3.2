@@ -1,0 +1,177 @@
+{
+  "status": "completed",
+  "evaluation": "Independent frozen subset9 test, complete CT scans",
+  "scans": 87,
+  "reference_nodules": 104,
+  "slices": 22772,
+  "no_included_target_scans": 29,
+  "model": {
+    "path": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\第一天交付\\项目\\backend\\weights\\yolo11s_full_25d_epoch090.pt",
+    "sha256": "f54e50f3c0af5585b8ce894d7eaa421ddf58306c0339dd2ef00912e454c5b1ee",
+    "selected_epoch": 90,
+    "mode": "yolo_only"
+  },
+  "fixed_validation_threshold_result": {
+    "threshold": 0.5705289244651794,
+    "TP": 92,
+    "FN": 12,
+    "FP": 88,
+    "sensitivity": 0.8846153846153846,
+    "fp_per_scan": 1.0114942528735633,
+    "scans": 87,
+    "reference_nodules": 104,
+    "threshold_selected_on_validation": true,
+    "test_threshold_tuning": false,
+    "sensitivity_ci95": [
+      0.8229082661290322,
+      0.9421745867768595
+    ]
+  },
+  "sensitivity_at_1_fp_per_scan": 0.8846153846153846,
+  "sensitivity_at_1_ci95": [
+    0.821045183714002,
+    0.9479166666666666
+  ],
+  "test_curve_operating_point_at_or_below_1_fp_per_scan": {
+    "threshold": 0.6044447422027588,
+    "TP": 92,
+    "FP": 77,
+    "FN": 12,
+    "sensitivity": 0.8846153846153846,
+    "fp_per_scan": 0.8850574712643678,
+    "scans": 87,
+    "reference_nodules": 104,
+    "maximum_fp_per_scan": 1.0
+  },
+  "seven_point_sensitivity": [
+    {
+      "fp_per_scan": 0.125,
+      "sensitivity": 0.6826923076923077,
+      "ci95": [
+        0.5137598969460853,
+        0.7815400073072707
+      ]
+    },
+    {
+      "fp_per_scan": 0.25,
+      "sensitivity": 0.75,
+      "ci95": [
+        0.638080357142857,
+        0.8518518518518519
+      ]
+    },
+    {
+      "fp_per_scan": 0.5,
+      "sensitivity": 0.8076923076923077,
+      "ci95": [
+        0.7203161199853676,
+        0.9036304793642655
+      ]
+    },
+    {
+      "fp_per_scan": 1.0,
+      "sensitivity": 0.8846153846153846,
+      "ci95": [
+        0.821045183714002,
+        0.9479166666666666
+      ]
+    },
+    {
+      "fp_per_scan": 2.0,
+      "sensitivity": 0.9230769230769231,
+      "ci95": [
+        0.8728730475240943,
+        0.9659371878121878
+      ]
+    },
+    {
+      "fp_per_scan": 4.0,
+      "sensitivity": 0.9326923076923077,
+      "ci95": [
+        0.8867654986522912,
+        0.9732172619047619
+      ]
+    },
+    {
+      "fp_per_scan": 8.0,
+      "sensitivity": 0.9519230769230769,
+      "ci95": [
+        0.9166491596638655,
+        0.9876543209876543
+      ]
+    }
+  ],
+  "test_subset_cpm": 0.8475274725274725,
+  "candidate_pool_hits": 99,
+  "candidate_pool_misses": 5,
+  "maximum_candidate_pool_sensitivity": 0.9519230769230769,
+  "slice_candidates": 5674,
+  "merged_volume_candidates": 2386,
+  "max_det_capped_slices": 0,
+  "ignored_excluded_candidates": 576,
+  "duplicate_hits_ignored": 98,
+  "overlapping_included_marks": 0,
+  "official_full_curve_parity": true,
+  "detection_by_size_at_frozen_threshold": [
+    {
+      "size_group": "below_5_mm",
+      "reference_nodules": 28,
+      "detected": 21,
+      "sensitivity": 0.75
+    },
+    {
+      "size_group": "5_to_below_10_mm",
+      "reference_nodules": 51,
+      "detected": 46,
+      "sensitivity": 0.9019607843137255
+    },
+    {
+      "size_group": "10_mm_or_larger",
+      "reference_nodules": 25,
+      "detected": 25,
+      "sensitivity": 1.0
+    }
+  ],
+  "validation_reference": {
+    "threshold": 0.5705289244651794,
+    "TP": 154,
+    "FP": 121,
+    "FN": 25,
+    "sensitivity": 0.8603351955307262,
+    "fp_per_scan": 0.968,
+    "scans": 125,
+    "reference_nodules": 179,
+    "maximum_fp_per_scan": 1.0
+  },
+  "threshold_not_changed": true,
+  "inference_elapsed_seconds": 368.55973209999866,
+  "bootstrap": {
+    "repeats": 1000,
+    "seed": 20261013,
+    "sampling_unit": "whole CT scan with replacement",
+    "lower": [
+      0.5137598969460853,
+      0.638080357142857,
+      0.7203161199853676,
+      0.821045183714002,
+      0.8728730475240943,
+      0.8867654986522912,
+      0.9166491596638655
+    ],
+    "upper": [
+      0.7815400073072707,
+      0.8518518518518519,
+      0.9036304793642655,
+      0.9479166666666666,
+      0.9659371878121878,
+      0.9732172619047619,
+      0.9876543209876543
+    ]
+  },
+  "limitations": [
+    "One held-out subset, not a complete ten-fold LUNA16 benchmark.",
+    "Known demo CT is excluded; official subset9 contains 88 CTs.",
+    "FROC operating points characterize the test curve; they do not change the frozen deployment threshold.",
+    "Candidates below 0.01 are discarded. Three-slice input and 3mm merging match prior validation."
+  ]
+}

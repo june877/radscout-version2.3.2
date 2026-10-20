@@ -1,157 +1,115 @@
 import { useRef, useEffect, useState } from 'react'
+import { estimateBoxSize } from '../seriesUtils'
 
-const LABEL_COLORS = {
-  '肺结节 (Nodule)': '#FF3B30',
-  '肿块 (Mass)': '#FF9500',
-  '钙化 (Calcification)': '#007AFF',
-}
+const LABEL_COLORS = { '肺结节 (Nodule)': '#FF3B30', 'Nodule': '#FF3B30' }
 
-export default function DetectionViewer({ imageDataUrl, detections, modelName, inferenceTime }) {
+/**
+ * v3.0 DetectionViewer — 单图二阶段检测结果展示
+ *
+ * Props:
+ *   imageDataUrl: string
+ *   allDetections: [det with keep/resnet_score/yolo_score/filter_reason]
+ *   mode: "yolo_only" | "two_stage" | "all"
+ *   modelName, inferenceTime, summary
+ */
+export default function DetectionViewer({ imageDataUrl, allDetections, mode, modelName, inferenceTime, summary }) {
   const canvasRef = useRef(null)
   const containerRef = useRef(null)
-  const [activeId, setActiveId] = useState(null)
+
+  const visibleDets = (allDetections || []).filter(d => {
+    if (mode === 'yolo_only') return true
+    if (mode === 'two_stage') return d.keep
+    return true  // all
+  }).map(d => ({
+    ...d,
+    _style: mode === 'all' && !d.keep ? 'dashed' : 'solid'
+  }))
 
   useEffect(() => {
+    const canvas = canvasRef.current; const container = containerRef.current
+    if (!canvas || !container) return
     const img = new Image()
     img.onload = () => {
-      const canvas = canvasRef.current
-      const container = containerRef.current
-      if (!canvas || !container) return
-
-      const maxW = container.clientWidth
-      const scale = Math.min(1, maxW / img.naturalWidth)
-      canvas.width = img.naturalWidth * scale
-      canvas.height = img.naturalHeight * scale
-
+      const maxW = container.clientWidth; const scale = Math.min(1, maxW / img.naturalWidth)
+      canvas.width = img.naturalWidth * scale; canvas.height = img.naturalHeight * scale
       const ctx = canvas.getContext('2d')
-      ctx.imageSmoothingEnabled = true
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-
-      detections.forEach((det) => {
+      visibleDets.forEach(det => {
         const { x, y, width, height } = det.bbox
-        const bx = x * scale
-        const by = y * scale
-        const bw = width * scale
-        const bh = height * scale
-        const color = LABEL_COLORS[det.label] || '#34C759'
-        const isActive = activeId === det.id
-
-        // 半透明填充
-        ctx.fillStyle = color + (isActive ? '28' : '12')
-        ctx.fillRect(bx, by, bw, bh)
-
-        // 边框
-        ctx.lineWidth = isActive ? 3 : 2
-        ctx.strokeStyle = color
-        ctx.strokeRect(bx, by, bw, bh)
-
-        // 四角准星
-        const cs = Math.min(14, bw * 0.3, bh * 0.3)
-        ctx.lineWidth = isActive ? 2.5 : 2
-        drawCorner(ctx, bx, by, cs, 0)           // 左上
-        drawCorner(ctx, bx + bw, by, cs, 1)       // 右上
-        drawCorner(ctx, bx, by + bh, cs, 2)       // 左下
-        drawCorner(ctx, bx + bw, by + bh, cs, 3)  // 右下
-
-        // 标签
-        const shortLabel = det.label.includes('结节')
-          ? 'Nodule' : det.label.includes('肿块')
-          ? 'Mass' : det.label.includes('钙化')
-          ? 'Calc' : det.label
-        const labelText = `${shortLabel} ${(det.confidence * 100).toFixed(0)}%`
-        ctx.font = `${isActive ? 'bold ' : ''}${Math.max(11, 12.5 * scale)}px "Segoe UI", "PingFang SC", sans-serif`
-        const tm = ctx.measureText(labelText)
-        const tw = tm.width
-        const th = Math.max(15, 17 * scale)
-        const lx = bx
-        const ly = by - th - 3 > 0 ? by - th - 3 : by + 2
-
-        const padX = 8
-        const padY = 3
-        const rx = 5
-        ctx.beginPath()
-        ctx.moveTo(lx + rx, ly)
-        ctx.lineTo(lx + tw + padX * 2 - rx, ly)
-        ctx.arcTo(lx + tw + padX * 2, ly, lx + tw + padX * 2, ly + rx, rx)
-        ctx.lineTo(lx + tw + padX * 2, ly + th + padY * 2 - rx)
-        ctx.arcTo(lx + tw + padX * 2, ly + th + padY * 2, lx + tw + padX * 2 - rx, ly + th + padY * 2, rx)
-        ctx.lineTo(lx + rx, ly + th + padY * 2)
-        ctx.arcTo(lx, ly + th + padY * 2, lx, ly + th + padY * 2 - rx, rx)
-        ctx.lineTo(lx, ly + rx)
-        ctx.arcTo(lx, ly, lx + rx, ly, rx)
-        ctx.closePath()
-        ctx.fillStyle = color
-        ctx.fill()
-        ctx.fillStyle = '#FFFFFF'
-        ctx.textBaseline = 'middle'
-        ctx.fillText(labelText, lx + padX, ly + padY + th / 2)
+        const bx = x * scale, by = y * scale, bw = width * scale, bh = height * scale
+        const color = det._style === 'dashed' ? '#666' : (LABEL_COLORS[det.label] || '#34C759')
+        ctx.fillStyle = color + '18'; ctx.fillRect(bx, by, bw, bh)
+        ctx.lineWidth = det._style === 'dashed' ? 1.5 : 2.5
+        if (det._style === 'dashed') ctx.setLineDash([5, 3])
+        ctx.strokeStyle = color; ctx.strokeRect(bx, by, bw, bh); ctx.setLineDash([])
+        // Label
+        const ypct = det.yolo_score != null ? (det.yolo_score * 100).toFixed(0) + '%' : (det.confidence * 100).toFixed(0) + '%'
+        const rpct = det.resnet_score != null ? 'R:' + (det.resnet_score * 100).toFixed(0) + '%' : ''
+        const label = ypct + (rpct ? ' ' + rpct : '')
+        ctx.font = `bold ${Math.max(10, 11 * scale)}px sans-serif`
+        const tm = ctx.measureText(label); const lx = bx, ly = by - 14 > 0 ? by - 14 : by + 2
+        ctx.fillStyle = color; ctx.fillRect(lx, ly, tm.width + 8, 13)
+        ctx.fillStyle = '#fff'; ctx.fillText(label, lx + 4, ly + 10)
       })
     }
     img.src = imageDataUrl
-  }, [imageDataUrl, detections, activeId])
+  }, [imageDataUrl, visibleDets])
 
   return (
     <div className="viewer">
       <div className="viewer-header">
         <span className="viewer-title">
-          检测结果 — {detections.length > 0
-            ? `共 ${detections.length} 处疑似病灶`
-            : '未检测到明显疑似结节'}
+          {visibleDets.length > 0 ? `${visibleDets.length} detections` : 'no nodule detected'}
         </span>
-        <span className="viewer-meta">{modelName} · 推理 {inferenceTime?.toFixed(0) || '—'} ms</span>
+        <span className="viewer-meta">{modelName} · {inferenceTime?.toFixed(0)}ms</span>
       </div>
       <div className="canvas-container" ref={containerRef}>
-        <canvas ref={canvasRef} style={{ maxWidth: '100%', cursor: 'pointer' }} />
-        {detections.length === 0 && (
-          <div style={{
-            position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
-            color: '#5a6070', fontSize: '0.9rem', pointerEvents: 'none',
-          }}>
-            未检测到明显疑似结节
-          </div>
-        )}
+        <canvas ref={canvasRef} style={{ maxWidth: '100%' }} />
       </div>
-      <ul className="detection-list">
-        {detections.map((det) => {
-          const sizeW = det.size_mm?.width
-          const sizeH = det.size_mm?.height
-          const sizeText = (sizeW != null && sizeH != null)
-            ? `${sizeW} × ${sizeH} mm`
-            : '尺寸未知'
-          return (
-          <li
-            key={det.id}
-            className={`detection-item ${activeId === det.id ? 'active' : ''}`}
-            onMouseEnter={() => setActiveId(det.id)}
-            onMouseLeave={() => setActiveId(null)}
-          >
-            <span
-              className="color-dot"
-              style={{ background: LABEL_COLORS[det.label] || '#34C759' }}
-            />
-            <div className="det-info">
-              <strong>{det.label}</strong>
-              <span className="det-desc">{det.description}</span>
-            </div>
-            <div className="det-meta">
-              <span className="det-confidence">{(det.confidence * 100).toFixed(0)}%</span>
-              <span className="det-size">{sizeText}</span>
-            </div>
-          </li>
-          )
-        })}
-      </ul>
+
+      {/* Summary */}
+      {summary && (
+        <div className="v3-summary-bar">
+          <span>YOLO: {summary.raw_count} | Kept: {summary.kept_count} | Filtered: {summary.filtered_count}
+            {summary.nms_removed_count != null ? ` | NMS: ${summary.nms_removed_count}` : ''}
+          </span>
+          <span style={{ color: '#5a6070', fontSize: '0.75rem' }}>
+            {mode === 'yolo_only' ? 'YOLO only' : mode === 'two_stage' ? 'Two-stage' : 'All'}
+          </span>
+        </div>
+      )}
+
+      {visibleDets.length > 0 && (
+        <ul className="detection-list">
+          {visibleDets.map(det => (
+            <li key={det.id} className={`detection-item ${det._style === 'dashed' ? 'filtered-out' : ''}`}>
+              <span className="color-dot"
+                style={{ background: det._style === 'dashed' ? '#555' : (LABEL_COLORS[det.label] || '#34C759') }} />
+              <div className="det-info">
+                <strong>{det.label} {det._style === 'dashed' ? '(filtered)' : ''}</strong>
+                <span className="det-desc">
+                  Y: {det.yolo_score != null ? (det.yolo_score * 100).toFixed(1) + '%' : '-'}
+                  {' | '}R: {det.resnet_score != null ? (det.resnet_score * 100).toFixed(1) + '%' : '-'}
+                  {' | '}Final: {det.final_score != null ? (det.final_score * 100).toFixed(1) + '%' : '-'}
+                  {' | '}{det.filter_reason || ''}
+                </span>
+              </div>
+              <div className="det-meta">
+                <span className="det-confidence" style={det._style === 'dashed' ? { color: '#666' } : {}}>
+                  {(det.yolo_score * 100).toFixed(0)}%
+                </span>
+                <span className="det-size">估计半径 {estimateBoxSize(det).radius.toFixed(2)} {estimateBoxSize(det).unit}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {visibleDets.length === 0 && (
+        <div style={{ padding: '16px', textAlign: 'center', color: '#5a6070', fontSize: '0.9rem' }}>
+          no nodule detected
+        </div>
+      )}
     </div>
   )
-}
-
-function drawCorner(ctx, cx, cy, size, dir) {
-  ctx.beginPath()
-  switch (dir) {
-    case 0: ctx.moveTo(cx, cy + size); ctx.lineTo(cx, cy); ctx.lineTo(cx + size, cy); break
-    case 1: ctx.moveTo(cx - size, cy); ctx.lineTo(cx, cy); ctx.lineTo(cx, cy + size); break
-    case 2: ctx.moveTo(cx, cy - size); ctx.lineTo(cx, cy); ctx.lineTo(cx + size, cy); break
-    case 3: ctx.moveTo(cx - size, cy); ctx.lineTo(cx, cy); ctx.lineTo(cx, cy - size); break
-  }
-  ctx.stroke()
 }

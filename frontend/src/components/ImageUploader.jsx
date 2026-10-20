@@ -48,7 +48,7 @@ export default function ImageUploader({ onFilesSelect, disabled, multiple = true
     >
       <div className="uploader-icon">📂</div>
       <h3>上传连续 CT 切片</h3>
-      <p>请选择同一 CT 序列中连续导出的 PNG/JPG 切片</p>
+      <p>请选择同一 CT 序列中连续导出的灰度 PNG/JPG 切片；不要上传训练集的三通道合成图</p>
       <p className="uploader-hint">
         文件名需按层面顺序排列（如 slice_001.png, slice_002.png...）。
         2.5D 检测至少需要 3 张连续切片。

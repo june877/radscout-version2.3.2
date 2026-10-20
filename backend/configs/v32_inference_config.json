@@ -1,0 +1,21 @@
+{
+  "yolo_weights": "weights/yolo11s_full_25d_epoch090.pt",
+  "yolo_sha256": "f54e50f3c0af5585b8ce894d7eaa421ddf58306c0339dd2ef00912e454c5b1ee",
+  "selected_epoch": 90,
+  "resnet_weights": "outputs/fp_resnet18_v32/best_fp_resnet18_v32.pt",
+  "fallback_resnet_weights": "outputs/fp_resnet18_png/best_fp_resnet18.pt",
+  "imgsz": 640,
+  "yolo_conf": 0.01,
+  "yolo_display_threshold": 0.5705289244651794,
+  "merge_radius_mm": 3.0,
+  "resnet_threshold": 0.25,
+  "patch_size": 96,
+  "expand_ratio": 1.5,
+  "default_mode": "yolo_only",
+  "input_type": "ct_sequence",
+  "model_variant": "yolo11s-full-25d-epoch090",
+  "note": "YOLO is the selected primary model. Geometry-enabled YOLO uses the frozen 3mm grouping and score threshold. ResNet modes remain legacy engineering comparisons.",
+  "nms_iou_threshold": 0.7,
+  "containment_threshold": null,
+  "device": "cuda"
+}

@@ -1,0 +1,142 @@
+{
+  "status": "completed",
+  "ultralytics_version": "8.4.60",
+  "model": {
+    "path": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\第一天交付\\项目\\backend\\weights\\yolo11s_full_25d_epoch090.pt",
+    "sha256": "f54e50f3c0af5585b8ce894d7eaa421ddf58306c0339dd2ef00912e454c5b1ee",
+    "selected_epoch": 90,
+    "mode": "yolo_only"
+  },
+  "protocol": "D:\\python_gjw\\ct_subset9_20261013\\box_map\\protocol.json",
+  "inference_confidence_floor": 0.001,
+  "P_R_reporting": "Ultralytics precision and recall at smoothed maximum-F1 confidence",
+  "scopes": {
+    "full_volume": {
+      "images": 22772,
+      "positive_images": 740,
+      "targets": 783,
+      "predictions": 17169,
+      "metrics": {
+        "metrics/precision(B)": 0.5797674446494775,
+        "metrics/recall(B)": 0.5180242164142332,
+        "metrics/mAP50(B)": 0.5123610980155338,
+        "metrics/mAP50-95(B)": 0.27074046440325067,
+        "fitness": 0.27074046440325067
+      },
+      "AP_by_IoU": [
+        {
+          "IoU": 0.5,
+          "AP": 0.5123610980155338
+        },
+        {
+          "IoU": 0.550000011920929,
+          "AP": 0.48664879280148415
+        },
+        {
+          "IoU": 0.6000000238418579,
+          "AP": 0.4620586378623581
+        },
+        {
+          "IoU": 0.6499999761581421,
+          "AP": 0.4129535993314172
+        },
+        {
+          "IoU": 0.699999988079071,
+          "AP": 0.3363868409882853
+        },
+        {
+          "IoU": 0.75,
+          "AP": 0.24646702435961818
+        },
+        {
+          "IoU": 0.800000011920929,
+          "AP": 0.1707299689388313
+        },
+        {
+          "IoU": 0.8500000238418579,
+          "AP": 0.061002479616491356
+        },
+        {
+          "IoU": 0.8999999761581421,
+          "AP": 0.018136177211886876
+        },
+        {
+          "IoU": 0.949999988079071,
+          "AP": 0.0006600249066002491
+        }
+      ],
+      "precision_recall_at_frozen_display_threshold": {
+        "threshold": 0.5705289244651794,
+        "precision": 0.5008787238198477,
+        "recall": 0.5823754789272031
+      }
+    },
+    "training_rule_sampled_slices": {
+      "images": 1445,
+      "positive_images": 740,
+      "targets": 783,
+      "predictions": 2516,
+      "metrics": {
+        "metrics/precision(B)": 0.8094628958427746,
+        "metrics/recall(B)": 0.648786717752235,
+        "metrics/mAP50(B)": 0.6779235461992361,
+        "metrics/mAP50-95(B)": 0.3479184490140818,
+        "fitness": 0.3479184490140818
+      },
+      "AP_by_IoU": [
+        {
+          "IoU": 0.5,
+          "AP": 0.6779235461992361
+        },
+        {
+          "IoU": 0.550000011920929,
+          "AP": 0.6402426884446786
+        },
+        {
+          "IoU": 0.6000000238418579,
+          "AP": 0.5995314900590252
+        },
+        {
+          "IoU": 0.6499999761581421,
+          "AP": 0.5313854131252793
+        },
+        {
+          "IoU": 0.699999988079071,
+          "AP": 0.42578907477960715
+        },
+        {
+          "IoU": 0.75,
+          "AP": 0.3067283430819093
+        },
+        {
+          "IoU": 0.800000011920929,
+          "AP": 0.2040828099979427
+        },
+        {
+          "IoU": 0.8500000238418579,
+          "AP": 0.07228249471415386
+        },
+        {
+          "IoU": 0.8999999761581421,
+          "AP": 0.0203944174670124
+        },
+        {
+          "IoU": 0.949999988079071,
+          "AP": 0.0008242122719734659
+        }
+      ],
+      "precision_recall_at_frozen_display_threshold": {
+        "threshold": 0.5705289244651794,
+        "precision": 0.8702634955889468,
+        "recall": 0.5825536705829624
+      }
+    }
+  },
+  "notes": [
+    "Box mAP uses 2D IoU; the earlier 3D center-hit FROC is a separate metric.",
+    "This AP run retains scores >=0.001; the parent FROC run retained scores >=0.01.",
+    "GT boxes are sphere/slab projections derived from LUNA16 centers and diameters.",
+    "No inter-slice merging or excluded-finding ignore rule is applied to box mAP.",
+    "Full-volume and sampled-slice results use the same predictions and all 783 positive boxes."
+  ]
+}

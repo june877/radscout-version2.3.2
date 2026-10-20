@@ -1,75 +1,41 @@
-# Python cache and build artifacts
+# Local dependencies, caches and runtime state
 __pycache__/
 *.py[cod]
-*$py.class
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
-.coverage
-htmlcov/
-build/
-dist/
-*.egg-info/
-
-# Python environments
 .venv/
 venv/
-env/
-ENV/
-
-# Node / Vite
 node_modules/
-frontend/node_modules/
-frontend/dist/
-.npm/
+dist/
+build/
+.runtime/
+Ultralytics/
 .npm-cache/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# Local environment and secrets
+*.log
+*.tmp
+*.egg-info/
+# Credentials and local settings
 .env
 .env.*
 !.env.example
-
-# Medical datasets and generated samples
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+# Full datasets and checkpoints are distributed separately
 data/
 datasets/
 test_series/
+runs/
+weights/
+*.pt
+*.pth
+*.ckpt
+*.onnx
 *.mhd
 *.raw
 *.dcm
 *.nii
 *.nii.gz
-
-# Model weights and training artifacts
-weights/
-backend/weights/
-runs/
-backend/runs/
-outputs/
-backend/outputs/
-*.pt
-*.pth
-*.ckpt
-*.onnx
-
-# Temporary files and logs
-cache/
-*.log
-*.tmp
-*.temp
-
-# IDE settings
-.idea/
-.vscode/
-*.code-workspace
-
-# Operating-system files
-.DS_Store
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-$RECYCLE.BIN/
-

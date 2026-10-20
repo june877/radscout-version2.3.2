@@ -1,0 +1,17 @@
+{
+  "version": "3.3.0",
+  "archive_url": "https://github.com/june877/radscout-version2.3.2/releases/download/v3.3.0/RadScout-v3.3.0-models.zip",
+  "files": [
+    {
+      "path": "backend/weights/yolo11s_full_25d_epoch090.pt",
+      "size": 19210705,
+      "sha256": "f54e50f3c0af5585b8ce894d7eaa421ddf58306c0339dd2ef00912e454c5b1ee"
+    },
+    {
+      "path": "backend/outputs/fp_resnet18_v32/best_fp_resnet18_v32.pt",
+      "size": 134269513,
+      "sha256": "409a84df0947971f1ff6b669c7727d12bc89a22a742fc88222a5f8222eb72a37"
+    }
+  ],
+  "archive_sha256": "e23b561ecea662190dd58fce8db16271bde9a4cf006709e3d368660ed58b24ba"
+}

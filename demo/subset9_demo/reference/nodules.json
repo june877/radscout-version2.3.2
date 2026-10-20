@@ -1,0 +1,20 @@
+{
+  "type": "included point-and-diameter annotations; not segmentation",
+  "nodules": [
+    {
+      "annotation_id": 8,
+      "world_mm": [
+        105.0557924,
+        19.82526014,
+        -91.24725078
+      ],
+      "voxel_continuous": [
+        354.15946752,
+        279.0693936174545,
+        121.30109968800001
+      ],
+      "diameter_mm": 21.08961863,
+      "roundtrip_max_error_mm": 2.842170943040401e-14
+    }
+  ]
+}

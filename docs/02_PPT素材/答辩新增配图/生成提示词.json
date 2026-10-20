@@ -1,0 +1,17 @@
+{
+  "tool": "内置 image_gen",
+  "model_version": "工具未公开具体版本",
+  "date": "2026-10-14",
+  "assets": [
+    {
+      "file": "三切片概念插图.png",
+      "prompt": "Create a refined scientific illustration asset for the RIGHT HALF of a Chinese biomedical engineering thesis defense cover. Use case: scientific-educational. It is an illustration, not real CT evidence. On a clean pure white background, show three slightly offset, floating axial imaging planes, each square with an extremely subtle pale blue glass edge. They contain restrained charcoal and silver abstract chest-CT-like forms with tiny warm amber focal markers in the same corresponding location, communicating adjacent slices and spatial context. A faint translucent connection through the three planes. Orthographic/isometric viewpoint, minimal technical elegance, charcoal grayscale interiors, navy and muted cyan edges, one amber detail. No text, no numbers, no logos, no UI, no icons, no dense technical clutter, no realistic doctor or patient, no title layout. Isolated composition centered, generous white margins, suitable as a 4:3 landscape insert on a white slide, high clarity at projection size. Do not imitate any supplied clinical scan.",
+      "use": "封面概念插图，非真实CT"
+    },
+    {
+      "file": "前向与反向传播概念插图.png",
+      "prompt": "Create a simple polished conceptual neural-network illustration asset for a university presentation about forward propagation, backpropagation and optimization. Use case: scientific-educational. Pure white background, flat and restrained scientific editorial style, landscape aspect ratio around 2:1. A small fully connected network with only 4 input nodes on left, 5 hidden nodes in middle, and 3 output nodes on right. Nodes are outlined navy circles, connecting edges fine pale gray, balanced large whitespace. A straight navy-blue forward arrow above the network pointing left-to-right, and a straight muted amber gradient-return arrow below pointing right-to-left. Simple and coherent; not the detailed architecture of YOLO or ResNet. Do NOT put any text, formula, letters, digits, labels, title, legend, caption, panels, UI, decorations or watermark in the image. Diagram is a conceptual motif only; editable explanatory words will be placed on the actual slide.",
+      "use": "第5页概念网络示意，非YOLO真实结构"
+    }
+  ]
+}

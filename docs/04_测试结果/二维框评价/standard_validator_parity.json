@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "images": 16,
+  "target_boxes": 4,
+  "cached_metric_results": {
+    "metrics/precision(B)": 0.9860152975257686,
+    "metrics/recall(B)": 1.0,
+    "metrics/mAP50(B)": 0.995,
+    "metrics/mAP50-95(B)": 0.66525,
+    "fitness": 0.66525
+  },
+  "standard_model_val_results": {
+    "metrics/precision(B)": 0.9862441867890306,
+    "metrics/recall(B)": 1.0,
+    "metrics/mAP50(B)": 0.995,
+    "metrics/mAP50-95(B)": 0.66525,
+    "fitness": 0.66525
+  },
+  "mAP_parity_tolerance": 1e-06,
+  "sample_cases": "one target-free CT and one eight-nodule CT",
+  "weights_unchanged": true
+}

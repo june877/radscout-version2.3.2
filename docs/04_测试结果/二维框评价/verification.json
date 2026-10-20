@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "scans": 87,
+  "slices": 22772,
+  "reference_nodules": 104,
+  "reference_slice_boxes": 783,
+  "standard_model_val_mAP_parity": true,
+  "weights_unchanged": true,
+  "max_det_capped_slices": 0
+}

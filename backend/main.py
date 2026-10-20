@@ -1,235 +1,203 @@
 """
-RadScout v2.3 — FastAPI 后端
-YOLO11s 3-slice 2.5D (R=z-1, G=z, B=z+1) CT 肺结节检测
+RadScout v3.2 — FastAPI 后端
+Two-stage detection: YOLO11s-2.5D + PNG-ResNet18-2.5D FP reduction
 
 启动:
     cd backend
-    python main.py
-    然后访问 http://localhost:8000/docs 查看 API 文档
+    D:/Python/python.exe main.py
+    http://localhost:8000/docs
 """
 
-import os, json, io
-import numpy as np
-from PIL import Image
-from fastapi import FastAPI, UploadFile, File
+import os, io, json, re
+from pathlib import Path
+from fastapi import FastAPI, UploadFile, File, Query, Form
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
-
-from models.yolo_inference import YOLOInference25D
+from fastapi.responses import JSONResponse, FileResponse
 
 BACKEND_DIR = os.path.dirname(os.path.abspath(__file__))
-WEIGHTS_25D_PATH = os.path.join(BACKEND_DIR, "weights", "yolo11s_25d_3slice_best.pt")
-WEIGHTS_2D_PATH = os.path.join(BACKEND_DIR, "weights", "yolo11s_luna_best.pt")
-METRICS_25D_PATH = os.path.join(BACKEND_DIR, "outputs", "yolo25d_3slice_metrics.json")
-METRICS_2D_PATH = os.path.join(BACKEND_DIR, "outputs", "yolo_metrics.json")
+CONFIG_PATH = os.path.join(BACKEND_DIR, "configs", "v32_inference_config.json")
+os.environ.setdefault('YOLO_CONFIG_DIR', os.path.join(BACKEND_DIR, '.runtime', 'ultralytics'))
 
-app = FastAPI(
-    title="RadScout v2.3 API",
-    description="YOLO11s 3-slice 2.5D CT Nodule Detection — LUNA16 subset0-6",
-    version="2.3.0",
+# ── Load config ──
+with open(CONFIG_PATH, encoding='utf-8') as f:
+    config = json.load(f)
+
+YOLO_WEIGHTS = os.path.join(BACKEND_DIR, config["yolo_weights"])
+RESNET_WEIGHTS = os.path.join(BACKEND_DIR, config["resnet_weights"])
+if not os.path.isfile(RESNET_WEIGHTS) and config.get("fallback_resnet_weights"):
+    fallback_path = os.path.join(BACKEND_DIR, config["fallback_resnet_weights"])
+    if os.path.isfile(fallback_path):
+        print(f"[v3.2] New ResNet checkpoint not found; using fallback: {fallback_path}")
+        RESNET_WEIGHTS = fallback_path
+
+DEMO_DIR = Path(BACKEND_DIR).parent / 'demo' / 'subset9_demo'
+app = FastAPI(title="RadScout 三切片定位 API", version="3.3.0")
+app.add_middleware(CORSMiddleware,
+                   allow_origins=["http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:3000"],
+                   allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+
+# ── Init two-stage detector ──
+from models.two_stage_inference import TwoStageDetector
+
+detector = TwoStageDetector(
+    yolo_weights=YOLO_WEIGHTS,
+    resnet_weights=RESNET_WEIGHTS,
+    device=config.get("device", "cuda"),
+    yolo_conf=config["yolo_conf"],
+    resnet_threshold=config["resnet_threshold"],
+    imgsz=config["imgsz"],
+    patch_size=config["patch_size"],
+    expand_ratio=config["expand_ratio"],
+    nms_iou_threshold=config.get("nms_iou_threshold", 0.5),
+    containment_threshold=config.get("containment_threshold"),
+    yolo_display_threshold=config.get('yolo_display_threshold'),
+    merge_radius_mm=config.get('merge_radius_mm',3.0),
+    expected_yolo_sha256=config.get('yolo_sha256'),
 )
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000"],
-    allow_credentials=True, allow_methods=["*"], allow_headers=["*"],
-)
-
-# ── 推理器: 2.5D 优先 ──
-if os.path.isfile(WEIGHTS_25D_PATH):
-    inference = YOLOInference25D(WEIGHTS_25D_PATH, device="cuda", conf_threshold=0.25)
-elif os.path.isfile(WEIGHTS_2D_PATH):
-    print("[main] 2.5D weights not found, falling back to v2.2 2D YOLO")
-    from models.yolo_inference import YOLOInference as YOLO2D
-    inference = YOLO2D(WEIGHTS_2D_PATH, device="cuda", conf_threshold=0.25)
-else:
-    inference = YOLOInference25D(WEIGHTS_25D_PATH, device="cuda", conf_threshold=0.25)
-
 
 # ============================================================
-# 辅助
-# ============================================================
-
-def _natural_sort_key(filename: str):
-    """自然排序: 提取文件名中所有数字用于排序"""
-    import re
-    parts = re.split(r'(\d+)', filename)
-    return [int(p) if p.isdigit() else p.lower() for p in parts]
-
-
-def _read_as_grayscale(file_bytes: bytes, target_size=None):
-    """读取图像字节 → 灰度 numpy array [H, W]"""
-    img = Image.open(io.BytesIO(file_bytes)).convert("L")
-    if target_size:
-        img = img.resize((target_size, target_size), Image.BILINEAR)
-    return np.array(img).astype(np.float32), img.size
-
-
-# ============================================================
-# API
-# ============================================================
-
 @app.get("/api/health")
-async def health_check():
+async def health():
     return {
-        "status": "ok",
-        "model_name": inference.model_name,
-        "yolo_model_loaded": inference.model_loaded,
-        "device": inference.device_str,
-        "weights_25d_exists": os.path.isfile(WEIGHTS_25D_PATH),
+        "status": "ok" if detector.yolo_loaded else "degraded",
+        "device": detector.device,
+        "load_errors": detector.load_errors,
+        "model_name": detector.model_name,
+        "yolo_loaded": detector.yolo_loaded,
+        "resnet_loaded": detector.resnet_loaded,
+        "config": {
+            "yolo_conf": detector.yolo_conf,
+            "resnet_threshold": detector.resnet_threshold,
+            "default_mode": config["default_mode"],
+            "yolo_weights":YOLO_WEIGHTS,
+            "yolo_sha256":detector.yolo_sha256,
+            "selected_epoch":config.get('selected_epoch'),
+            "imgsz":detector.imgsz,
+            "yolo_display_threshold":detector.yolo_display_threshold,
+            "nms_iou_threshold":detector.nms_iou_threshold,
+            "merge_radius_mm":detector.merge_radius_mm,
+            "resnet_weights": RESNET_WEIGHTS,
+        },
     }
 
 
-@app.post("/api/detect-series")
-async def detect_series(files: list[UploadFile] = File(...)):
+@app.post("/api/v3/detect")
+async def v3_detect(
+    file: UploadFile = File(...),
+    mode: str = Query(config['default_mode'], pattern="^(yolo_only|two_stage|all)$"),
+    resnet_threshold: float | None = Query(None, ge=0, le=1),
+    input_type: str = Query("yolo_25d_rgb", pattern="^(yolo_25d_rgb|ct_sequence)$"),
+):
     """
-    ★ v2.3 主接口: 上传连续 CT 切片序列，逐层 2.5D 检测。
+    v3.2 二阶段检测 — 单张 2.5D RGB 图像 (R=z-1, G=z, B=z+1)
 
-    要求至少 3 张 PNG/JPG，按文件名自然排序。
-    每层构造 R=z-1, G=z, B=z+1 输入 YOLO11s。
-    边缘层使用复制补齐。
+    mode: yolo_only | two_stage | all
+    resnet_threshold: 不传则使用配置文件中的默认值
+    input_type: yolo_25d_rgb (训练集2.5D RGB PNG) | ct_sequence (连续CT切片)
     """
-    if len(files) < 3:
-        return JSONResponse(status_code=400, content={
-            "error": f"2.5D 检测至少需要 3 张连续切片，当前仅 {len(files)} 张。"
-        })
-
-    # 校验文件类型
     allowed = (".png", ".jpg", ".jpeg")
-    for f in files:
-        if not f.filename.lower().endswith(allowed):
-            return JSONResponse(status_code=400, content={
-                "error": f"不支持的文件类型: {f.filename}，仅支持 PNG/JPG/JPEG"
-            })
+    if not file.filename.lower().endswith(allowed):
+        return JSONResponse(status_code=400, content={"error": "仅支持 PNG/JPG"})
 
-    # 按文件名自然排序
-    sorted_files = sorted(files, key=lambda f: _natural_sort_key(f.filename))
-    ordered_names = [f.filename for f in sorted_files]
-
-    # 检查模型
-    if not inference.model_loaded:
-        return JSONResponse(status_code=503, content={
-            "error": "YOLO 2.5D 权重不存在，请先训练 v2.3 模型。",
-            "expected_path": WEIGHTS_25D_PATH,
-            "model_loaded": False,
-        })
-
-    # 读取所有切片
-    slices = []
-    sizes = set()
-    for f in sorted_files:
-        content = await f.read()
-        arr, (w, h) = _read_as_grayscale(content)
-        slices.append(arr)
-        sizes.add((w, h))
-
-    if len(sizes) > 1:
-        return JSONResponse(status_code=400, content={
-            "error": f"所有切片尺寸必须一致，检测到 {len(sizes)} 种不同尺寸: {sizes}"
-        })
-
-    # ── 逐层 2.5D 推理（直接调 YOLO model.predict，不经过 detect() 避免 .convert("L")） ──
-    import time
-    t0 = time.time()
-    N = len(slices)
-    detections_by_slice = {}
-
-    for i in range(N):
-        # 构造 3-slice: R=z-1, G=z, B=z+1，边界复制补齐
-        r = slices[i-1] if i > 0 else slices[0]
-        g = slices[i]
-        b = slices[i+1] if i < N-1 else slices[N-1]
-
-        # 堆叠 RGB 直接给 YOLO
-        rgb = np.stack([r, g, b], axis=-1).astype(np.uint8)
-        rgb_pil = Image.fromarray(rgb, mode="RGB")
-
-        # 直接调 YOLO model.predict——保留三通道（不经过 YOLOInference25D.detect 的 .convert("L")）
-        if inference.model_loaded and inference.model is not None:
-            results = inference.model.predict(
-                rgb_pil, conf=inference.conf_threshold,
-                device=inference.device_str, imgsz=512, verbose=False)
-            dets = []
-            if results and len(results) > 0 and results[0].boxes is not None:
-                boxes = results[0].boxes
-                if len(boxes) > 0:
-                    xyxy = boxes.xyxy.cpu().numpy()
-                    confs = boxes.conf.cpu().numpy()
-                    for j in range(len(xyxy)):
-                        x1, y1, x2, y2 = xyxy[j]
-                        dets.append({
-                            "id": j+1,
-                            "bbox": {"x": int(x1), "y": int(y1), "width": int(x2-x1), "height": int(y2-y1)},
-                            "label": "肺结节 (Nodule)",
-                            "confidence": round(float(confs[j]), 4),
-                            "size_mm": {"width": None, "height": None},
-                            "description": f"2.5D YOLO (prob={float(confs[j]):.2f})",
-                        })
-            detections_by_slice[str(i)] = dets
-        else:
-            detections_by_slice[str(i)] = []
-
-    elapsed = (time.time() - t0) * 1000
-
-    return JSONResponse(content={
-        "model_name": inference.model_name,
-        "slice_count": N,
-        "ordered_filenames": ordered_names,
-        "detections_by_slice": detections_by_slice,
-        "inference_time_ms": round(elapsed, 1),
-        "note": "2.5D inference (R=z-1, G=z, B=z+1) using adjacent uploaded slices.",
-    })
+    image_bytes = await file.read()
+    result = detector.detect_single(image_bytes, mode=mode, input_type=input_type, resnet_threshold=resnet_threshold)
+    if "error" in result:
+        return JSONResponse(status_code=503, content=result)
+    return JSONResponse(content=result)
 
 
-@app.post("/api/detect")
-async def detect_lesions(file: UploadFile = File(...)):
-    """
-    单张检测（保留用于调试，v2.3 主功能为 /api/detect-series）
-    """
-    allowed_ext = (".png", ".jpg", ".jpeg")
-    if not file.filename.lower().endswith(allowed_ext):
+@app.post("/api/v3/detect-series")
+async def v3_detect_series(
+    files: list[UploadFile] = File(...),
+    mode: str = Query(config['default_mode'], pattern="^(yolo_only|two_stage|all)$"),
+    resnet_threshold: float | None = Query(None, ge=0, le=1),
+    input_type: str = Query("ct_sequence", pattern="^(yolo_25d_rgb|ct_sequence)$"),
+    metadata: str | None = Form(None),
+):
+    """v3.0 连续切片序列检测。input_type: ct_sequence (默认)"""
+    if len(files) < 3:
         return JSONResponse(status_code=400,
-                            content={"error": "不支持的文件类型，请上传 PNG/JPG"})
-
-    if not inference.model_loaded:
-        return JSONResponse(status_code=503, content={
-            "error": "模型权重未加载，请先训练",
-            "model_loaded": False,
-        })
+                            content={"error": "至少需要 3 张连续切片（ct_sequence 模式）"})
+    for f in files:
+        if not f.filename.lower().endswith((".png", ".jpg", ".jpeg")):
+            return JSONResponse(status_code=400,
+                                content={"error": f"不支持: {f.filename}"})
 
     try:
-        image_bytes = await file.read()
-        result = inference.detect(image_bytes)
-        if "error" in result:
-            return JSONResponse(status_code=503, content=result)
-        return JSONResponse(content=result)
-    except Exception as e:
-        return JSONResponse(status_code=500,
-                            content={"error": f"检测失败: {str(e)}"})
+        geometry_metadata=json.loads(metadata) if metadata is not None else None
+    except (TypeError, ValueError):
+        return JSONResponse(status_code=400, content={'error':'metadata 必须是有效的 JSON'})
+    files_data = [(f.filename, await f.read()) for f in files]
+    result = detector.detect_series(files_data, mode=mode, input_type=input_type,
+                                    resnet_threshold=resnet_threshold, metadata=geometry_metadata)
+    if "error" in result:
+        return JSONResponse(status_code=503, content=result)
+    return JSONResponse(content=result)
+
+
+# ── Legacy compat ──
+@app.post("/api/detect")
+async def legacy_detect(file: UploadFile = File(...)):
+    """兼容旧版单张检测 (默认 two_stage)"""
+    return await v3_detect(file=file, mode=config['default_mode'], resnet_threshold=None, input_type="yolo_25d_rgb")
+
+
+@app.post("/api/detect-series")
+async def legacy_detect_series(files: list[UploadFile] = File(...)):
+    """兼容旧版序列检测 (默认 two_stage)"""
+    return await v3_detect_series(files=files, mode=config['default_mode'], resnet_threshold=None, input_type="ct_sequence", metadata=None)
+
+
+@app.get('/api/demo')
+async def get_demo():
+    """A known demonstration case; references are returned only for display."""
+    if not (DEMO_DIR/'metadata.json').is_file():
+        return JSONResponse(status_code=404,content={'error':'未找到带标注演示包'})
+    metadata=json.loads((DEMO_DIR/'metadata.json').read_text(encoding='utf-8'))
+    reference=json.loads((DEMO_DIR/'reference/nodules.json').read_text(encoding='utf-8'))
+    filenames=sorted(p.name for p in (DEMO_DIR/'images').glob('slice_*.png'))
+    return {'metadata':metadata,'references':reference.get('nodules',[]),'filenames':filenames}
+
+
+@app.get('/api/demo/images/{filename}')
+async def get_demo_image(filename:str):
+    if not re.fullmatch(r'slice_\d+\.png',filename):
+        return JSONResponse(status_code=400,content={'error':'无效的演示切片文件名'})
+    image=DEMO_DIR/'images'/filename
+    if not image.is_file():
+        return JSONResponse(status_code=404,content={'error':'演示切片不存在'})
+    return FileResponse(image,media_type='image/png')
 
 
 @app.get("/api/metrics")
 async def get_metrics():
-    metrics_file = None
-    for p in [METRICS_25D_PATH, METRICS_2D_PATH]:
-        if os.path.isfile(p):
-            metrics_file = p
-            break
-    if metrics_file is None:
-        return JSONResponse(content={
-            "model_name": inference.model_name,
-            "dataset": "LUNA16 subset0-6",
-            "metrics": {},
-            "note": "尚未完成训练。请运行 train_yolo25d.py。",
-        })
-    try:
-        with open(metrics_file, "r", encoding="utf-8") as f:
-            return JSONResponse(content=json.load(f))
-    except Exception as e:
-        return JSONResponse(status_code=500,
-                            content={"error": f"读取 metrics 失败: {str(e)}"})
+    """读取 YOLO 2.5D + ResNet18 指标"""
+    result = {"yolo_metrics": None, "resnet_metrics": None, "two_stage_eval": None,
+              "selected_epoch":config.get('selected_epoch'), 'legacy_resnet_comparison':True}
+
+    yolo_path = os.path.join(BACKEND_DIR, "configs", "selected_model_validation.json")
+    if os.path.isfile(yolo_path):
+        with open(yolo_path,encoding='utf-8') as f:
+            result["yolo_metrics"] = json.load(f)
+
+    rn_path = os.path.join(BACKEND_DIR, "outputs", "fp_resnet18_v32", "metrics.json")
+    if not os.path.isfile(rn_path):
+        rn_path = os.path.join(BACKEND_DIR, "outputs", "fp_resnet18_png", "metrics.json")
+    if os.path.isfile(rn_path):
+        with open(rn_path) as f:
+            result["resnet_metrics"] = json.load(f)
+
+    ts_path = os.path.join(BACKEND_DIR, "outputs", "two_stage_eval_v321", "detection_eval_report.json")
+    if not os.path.isfile(ts_path):
+        ts_path = os.path.join(BACKEND_DIR, "outputs", "two_stage_eval_png", "detection_eval_report.json")
+    if os.path.isfile(ts_path):
+        with open(ts_path) as f:
+            result["two_stage_eval"] = json.load(f)
+
+    return JSONResponse(content=result)
 
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=8000)

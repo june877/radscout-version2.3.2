@@ -1,0 +1,13 @@
+{
+  "yolo_weights": "weights/yolo11s_25d_3slice_best.pt",
+  "resnet_weights": "outputs/fp_resnet18_png/best_fp_resnet18.pt",
+  "imgsz": 512,
+  "yolo_conf": 0.10,
+  "resnet_threshold": 0.50,
+  "patch_size": 96,
+  "expand_ratio": 1.5,
+  "default_mode": "two_stage",
+  "input_type": "ct_sequence",
+  "model_variant": "png",
+  "note": "v3.1: PNG-based training/inference. ResNet patches from RGB channels, not raw CT."
+}

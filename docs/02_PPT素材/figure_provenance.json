@@ -1,0 +1,26 @@
+{
+  "source_csv": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\yolo11s_full_25d\\results.csv",
+  "source_csv_sha256": "26c114fd3c7d0d216abf182bd7f718a4e72e223cc2bf357e900bf9f9628b9a83",
+  "source_selection": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\center_selection.json",
+  "source_selection_sha256": "6230145389fde43c9da4f897e5f035c378a17d0d1d104726b7585e8bfade6df9",
+  "loss_epochs": 100,
+  "loss_validation_unit": "2375 sampled central slice images",
+  "detection_validation_unit": "125 complete CTs, 179 nodules, 33398 slices",
+  "detection_epochs": [
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    100
+  ],
+  "selected_epoch": 90,
+  "no_unmeasured_points_added": true,
+  "figures": [
+    "D:\\python_gjw\\ct_report_20261013\\deliverables\\检出率变化曲线.png",
+    "D:\\python_gjw\\ct_report_20261013\\deliverables\\训练loss变化曲线.png"
+  ]
+}

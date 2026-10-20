@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "scans": 87,
+  "slices": 22772,
+  "nodules": 104,
+  "native_world_coordinate_points_checked": 5674,
+  "true_nonidentity_direction_scans": [
+    "1.3.6.1.4.1.14519.5.2.1.6279.6001.312127933722985204808706697221"
+  ],
+  "every_slice_prediction_has_one_group": true,
+  "all_prediction_checksums_verified": true,
+  "fixed_threshold_target_and_false_positive_records_verified": true,
+  "all_no_target_scans_included": true,
+  "official_full_curve_parity": true,
+  "weights_unchanged": true
+}

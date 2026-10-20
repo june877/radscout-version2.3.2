@@ -1,0 +1,26 @@
+{
+  "model": "FPResNet18",
+  "training_samples": 3459,
+  "val_samples": 899,
+  "best_epoch": 1,
+  "train": {
+    "loss": 0.4434,
+    "accuracy": 0.8101
+  },
+  "val": {
+    "loss": 0.5798590311882096,
+    "accuracy": 0.7152,
+    "precision": 0.713,
+    "recall": 0.8945,
+    "specificity": 0.4327,
+    "f1": 0.7935,
+    "confusion_matrix": {
+      "TP": 492,
+      "FP": 198,
+      "TN": 151,
+      "FN": 58
+    },
+    "pos_count": 550,
+    "neg_count": 349
+  }
+}

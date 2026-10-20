@@ -1,0 +1,139 @@
+{
+  "status": "frozen_before_box_metric_inference",
+  "created_utc": "2026-10-13T11:22:06.826827+00:00",
+  "split": "independent frozen subset9 test",
+  "scans": 87,
+  "reference_nodules": 104,
+  "total_center_slices": 22772,
+  "no_included_target_scans": 29,
+  "model": {
+    "path": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\第一天交付\\项目\\backend\\weights\\yolo11s_full_25d_epoch090.pt",
+    "sha256": "f54e50f3c0af5585b8ce894d7eaa421ddf58306c0339dd2ef00912e454c5b1ee",
+    "selected_epoch": 90,
+    "mode": "yolo_only"
+  },
+  "frozen_deployment_threshold": 0.5705289244651794,
+  "threshold_source": "C:\\Users\\gjw\\Desktop\\综合设计2026\\CT三切片改进20261010\\YOLO完整训练与验证20261012\\full_validation\\epoch_090\\completion.json",
+  "validation_operating_point": {
+    "threshold": 0.5705289244651794,
+    "TP": 154,
+    "FP": 121,
+    "FN": 25,
+    "sensitivity": 0.8603351955307262,
+    "fp_per_scan": 0.968,
+    "scans": 125,
+    "reference_nodules": 179,
+    "maximum_fp_per_scan": 1.0
+  },
+  "input": {
+    "hu_window": [
+      -1000,
+      400
+    ],
+    "image_size": 512,
+    "channels": [
+      "z-1",
+      "z",
+      "z+1"
+    ],
+    "z_spacing": "native CT spacing",
+    "boundary": "replicate nearest available slice"
+  },
+  "candidate_parameters": {
+    "imgsz": 640,
+    "batch": 8,
+    "conf": 0.001,
+    "iou": 0.7,
+    "max_det": 300,
+    "device": "0",
+    "half": false,
+    "rect": false,
+    "save": false
+  },
+  "merge": {
+    "radius_mm": 3.0,
+    "rule": "Highest YOLO-score seed groups unassigned 3D centers within 3mm; no transitive chaining",
+    "coordinate": "seed center preserved; no annotation input",
+    "ranking": "maximum member score for each method; all methods share identical groups"
+  },
+  "matching": {
+    "rule": "3D world center distance strictly less than included annotation diameter/2",
+    "duplicate_hits": "one TP per included nodule, highest matching score; extra marks ignored as in official script",
+    "excluded_hits": "ignored if within excluded radius; unknown excluded diameter uses 10mm diameter",
+    "denominator": "104 included nodules and 87 complete test CT scans"
+  },
+  "froc": {
+    "points": [
+      0.125,
+      0.25,
+      0.5,
+      1.0,
+      2.0,
+      4.0,
+      8.0
+    ],
+    "interpolation": "linear, following LUNA16 script",
+    "main_actual_point": "highest sensitivity at a realizable threshold with FP/scan <=1; ties favor fewer FP",
+    "bootstrap": {
+      "repeats": 1000,
+      "seed": 20261013,
+      "unit": "CT scan"
+    }
+  },
+  "input_checksums": {
+    "annotations.csv": "c821f5f26a24a6b51bf7b1557c6196b672583f0b8ba5a6558bc0a91dc0bee41c",
+    "annotations_excluded.csv": "73a5c139257294fe45a68620ed1b2cf383ba8b22af1501d2f498abbd6b802c25",
+    "demo_uids.txt": "99cbaa3fca01cd816395e04d471924f132f333450e24903321cc48503ae7a072",
+    "demo_volumes.csv": "d38cd3ecc979ce9dfa929fd8f4128a4228b6fb0741107818506f2d5620560b62",
+    "reference_boxes_all_layers.csv": "62356b64361ffe5a5c2cce1cdf0dc44333eeadb9b38ae6a857fa210bfda49afd",
+    "sampled_test_slices.csv": "7161a568d38e9ae2b497f8ae824c788e288d8cfef882412a874b028151ac40a9",
+    "test_slice_reference_boxes.csv": "f2dd950f9ec4cb9e356fdc026aace4397519f60d31bdb4f87846ccadd2374838",
+    "test_uids.txt": "dcf2690c581e649cd8077710a82b1dfced78c67b4a1afc9f4521cc6a21be59bf",
+    "test_volumes.csv": "72d42da3ef98b24560efb1635e01a708e848ae471ad7189107eefba19b7683fe",
+    "train_uids.txt": "3126f80a54b5074eecccb9385d9952c15c1a5c1ce63e94426d60c44d524c4d60",
+    "val_uids.txt": "139bf2dc4aebb4f22c9c1f1150535f97a2c868f243bc3284e65a44a014676d17"
+  },
+  "evaluation_code_sha256": "2931ca7a786c06175d139251ed2c6dad99767db046e7cbefdd9de1c9551f6e83",
+  "preprocessing_code_sha256": "a626606ce8eb37a930df06696704b2c03fd279381a4a0e541e466ba35f6e4dcb",
+  "split_audit": {
+    "train_scans": 675,
+    "val_scans": 125,
+    "test_scans": 87,
+    "demo_scans": 1,
+    "all_test_scans_in_subset9": true,
+    "test_disjoint_from_train_val_demo": true,
+    "demo_excluded": "Previously inspected demonstration CT excluded according to frozen day1 split"
+  },
+  "limitations": [
+    "One held-out subset, not a complete ten-fold LUNA16 benchmark.",
+    "Known demo CT is excluded; official subset9 contains 88 CTs.",
+    "FROC operating points characterize the test curve; they do not change the frozen deployment threshold.",
+    "Candidates below 0.01 are discarded. Three-slice input and 3mm merging match prior validation."
+  ],
+  "box_metric_scope": {
+    "full_volume_images": 22772,
+    "included_slice_boxes": 783,
+    "positive_images": 740,
+    "sampled_images": 1445,
+    "sampled_background_images": 705,
+    "label_rule": "Same sphere/slab boxes and 8-decimal YOLO labels as training, not manual contours",
+    "IoU_thresholds": [
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.8500000000000001,
+      0.9,
+      0.95
+    ],
+    "confidence_floor": 0.001,
+    "slice_detections_merged": false,
+    "excluded_findings_ignored": false,
+    "P_R_reporting": "Ultralytics precision and recall at smoothed maximum-F1 confidence"
+  },
+  "source_reference_builder_sha256": "dd0ded22e1c0c27c95f9f5413d53b41fe9b6509ca3894c4e7c68365e28ccd080",
+  "previous_froc_results_unchanged": true
+}

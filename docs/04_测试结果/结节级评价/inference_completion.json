@@ -1,0 +1,12 @@
+{
+  "status": "completed",
+  "scans": 87,
+  "slices_processed": 22772,
+  "slice_candidates": 5674,
+  "max_det_capped_slices": 0,
+  "elapsed_seconds": 368.55973209999866,
+  "peak_reserved_gib": 0.583984375,
+  "pixel_only_inference": true,
+  "annotations_used_for_inference": false,
+  "weights_unchanged": true
+}

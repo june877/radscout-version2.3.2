@@ -1,0 +1,24 @@
+{
+  "test_evaluated": false,
+  "operating_point": {
+    "threshold": 0.5705289244651794,
+    "TP": 154,
+    "FP": 121,
+    "FN": 25,
+    "sensitivity": 0.8603351955307262,
+    "fp_per_scan": 0.968,
+    "scans": 125,
+    "reference_nodules": 179,
+    "maximum_fp_per_scan": 1.0
+  },
+  "cpm": 0.7749401436552275,
+  "selected_epoch": 90,
+  "checkpoint_sha256": "f54e50f3c0af5585b8ce894d7eaa421ddf58306c0339dd2ef00912e454c5b1ee",
+  "dataset": "internal validation; 125 CTs, 179 nodules",
+  "sampled_box_metrics": {
+    "metrics/precision(B)": 0.79786,
+    "metrics/recall(B)": 0.63673,
+    "metrics/mAP50(B)": 0.66264,
+    "metrics/mAP50-95(B)": 0.348
+  }
+}
